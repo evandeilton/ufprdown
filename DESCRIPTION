@@ -1,0 +1,32 @@
+Package: ufprdown
+Title: R Markdown Thesis Template for UFPR using Bookdown
+Version: 0.1.0
+Authors@R: c(
+    person("José Evandeilton", "Lopes", email = "evandeilton@gmail.com", 
+           role = c("cre", "aut")),
+    person("Chester", "Ismay", role = "ctb",
+           comment = "Original thesisdown author"),
+    person("Luiz", "Droubi", role = "ctb",
+           comment = "ufscdown author"))
+Description: Using the bookdown package and the PPGInf/UFPR LaTeX template,
+    this package provides an R Markdown thesis template for producing
+    dissertations and theses at the Universidade Federal do Paraná (UFPR).
+    It supports reproducible research with embedded R code for plots and
+    analyses, while following the UFPR formatting guidelines.
+Maintainer: José Evandeilton Lopes <evandeilton@gmail.com>
+Depends:
+    R (>= 3.5.0)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    bookdown,
+    knitr,
+    rmarkdown
+Suggests:
+    tinytex,
+    kableExtra,
+    ggplot2,
+    dplyr
+SystemRequirements: pandoc (>= 2.0) - http://pandoc.org
+RoxygenNote: 7.3.3

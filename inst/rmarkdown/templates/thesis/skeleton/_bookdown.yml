@@ -1,0 +1,20 @@
+book_filename: "render-thesis"
+chapter_name: ""
+rmd_files: ["index.Rmd", "01-chap1.Rmd", "02-chap2.Rmd", "03-chap3.Rmd", "04-chap4.Rmd", "96-conclusion.Rmd", "97-references.Rmd", "98-appendix.Rmd", "99-anexo.Rmd"]
+delete_merged_file: true
+language:
+  ui:
+    chapter_name: "Capítulo "
+  label:
+    fig: 'Figura '
+    tab: 'Tabela '
+    qua: 'Quadro '
+    eq: 'Equação '
+    thm: 'Teorema '
+    lem: 'Lema '
+    def: 'Definição '
+    cor: 'Corolário '
+    prp: 'Proposição '
+    exm: 'Exemplo '
+    rem: 'Observação '
+    proof: 'Demonstração. '

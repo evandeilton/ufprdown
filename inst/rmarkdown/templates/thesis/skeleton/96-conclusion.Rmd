@@ -1,0 +1,16 @@
+# Conclusão {#conclusao}
+
+## Considerações Finais
+
+Esta tese apresentou contribuições para a modelagem de dados de escala
+por meio de modelos de regressão beta com efeitos aleatórios.
+
+**TODO:** Sintetizar conclusões específicas.
+
+## Limitações
+
+**TODO:** Descrever limitações.
+
+## Trabalhos Futuros
+
+**TODO:** Sugerir direções de pesquisa.

@@ -1,0 +1,10 @@
+`r if(knitr:::is_latex_output()) '\\anexo'`
+
+# Repositório de código {#an-repo}
+
+O código fonte completo utilizado neste projeto está disponível no repositório GitHub através do link: https://github.com/exemplo.
+
+# Manuais dos Equipamentos {#an-manuais}
+
+Os manuais de operação dos equipamentos utilizados nos experimentos estão anexados às cópias impressas desta tese e disponíveis no CD-ROM anexo.
+

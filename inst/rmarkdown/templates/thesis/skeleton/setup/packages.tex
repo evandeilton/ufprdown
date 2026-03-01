@@ -1,0 +1,142 @@
+% =============================================================================
+% packages.tex — Pacotes e configurações globais para ufprdown
+% Baseado no packages.tex original do template PPGInf/UFPR
+% =============================================================================
+
+% ── Codificação e fontes ─────────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% Fonte principal: lmodern (Computer Modern melhorado, compatível com microtype)
+% O template original usa newtxtext/newtxmath, mas há conflito com microtype.
+\usepackage{lmodern}
+
+% Fontes para ambientes específicos
+\usepackage[scaled=0.9]{helvet}         % Sans Serif
+\usepackage{courier}                    % Verbatim, Listings, etc
+
+% ── Matemática ───────────────────────────────────────────────────────────────
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bm}                         % negrito matemático (\bm{})
+\usepackage{xparse}                     % para \NewDocumentCommand (citeproc)
+
+% Teoremas (desativado porque o bookdown usa amsthm e já define seus próprios labels
+% baseados no bloco 'language:' do _bookdown.yml. Se definirmos aqui, dá erro
+% de 'command \theorem already defined').
+
+% Operadores matemáticos
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\logit}{logit}
+\DeclareMathOperator{\diag}{diag}
+
+% ── Figuras ──────────────────────────────────────────────────────────────────
+\usepackage{graphicx}
+\usepackage[labelformat=simple]{subcaption}
+\renewcommand\thesubfigure{(\alph{subfigure})}
+
+% ── Tabelas ──────────────────────────────────────────────────────────────────
+\usepackage{booktabs}                   % \toprule, \midrule, \bottomrule
+\usepackage{longtable}                  % tabelas multi-páginas
+\usepackage{multirow}                   % células mescladas
+\usepackage{array}                      % extensões para tabelas
+
+% ── Código-fonte ─────────────────────────────────────────────────────────────
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.97,0.97,0.95}
+
+\lstdefinestyle{thesis-code}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    frame=single,
+    columns=flexible,
+    mathescape=true,
+    inputencoding=utf8,
+    extendedchars=true,
+}
+\lstset{style=thesis-code}
+
+% Suporte a caracteres acentuados em listings (do template original)
+\lstset{literate={á}{{\'a}}1  {ã}{{\~a}}1 {à}{{\`a}}1 {â}{{\^a}}1
+                 {Á}{{\'A}}1  {Ã}{{\~A}}1 {À}{{\`A}}1 {Â}{{\^A}}1
+                 {é}{{\'e}}1  {ê}{{\^e}}1 {É}{{\'E}}1  {Ê}{{\^E}}1
+                 {í}{{\'\i}}1 {Í}{{\'I}}1
+                 {ó}{{\'o}}1  {õ}{{\~o}}1 {ô}{{\^o}}1
+                 {Ó}{{\'O}}1  {Õ}{{\~O}}1 {Ô}{{\^O}}1
+                 {ú}{{\'u}}1  {Ú}{{\'U}}1
+                 {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 }
+
+% ── Algoritmos ───────────────────────────────────────────────────────────────
+\usepackage{algorithm,algorithmic}
+\floatname{algorithm}{Algoritmo}
+\renewcommand{\algorithmiccomment}[1]{~~~// #1}
+
+% ── Bibliografia ─────────────────────────────────────────────────────────────
+% As citações são processadas pelo pandoc citeproc (pandoc >= 3.x).
+% O estilo de citação é definido pelo arquivo CSL no YAML (csl: csl/apa.csl).
+
+% ── Pacotes diversos ─────────────────────────────────────────────────────────
+\usepackage{alltt}                      % verbatim melhorado
+\usepackage{lipsum}                     % texto aleatório (p/ exemplos)
+\usepackage[final]{pdfpages}            % inclusão de páginas em PDF
+\usepackage{rotating}                   % rotação de tabelas/figuras
+
+% ── Quadros (UFPR) ──────────────────────────────────────────────────────────
+\usepackage{float}
+\newfloat{quadro}{htbp}{loq}[chapter]
+\floatname{quadro}{Quadro}
+\newcommand{\listofquadros}{\listof{quadro}{Lista de Quadros}}
+
+% ── Comandos personalizados ──────────────────────────────────────────────────
+\newcommand{\bbeta}{\bm{\beta}}
+\newcommand{\bgamma}{\bm{\gamma}}
+\newcommand{\btheta}{\bm{\theta}}
+\newcommand{\bSigma}{\bm{\Sigma}}
+\newcommand{\TODO}[1]{\textcolor{red}{\textbf{[TODO: #1]}}}
+
+% Atalhos úteis para centralização e fonte (notas de autor)
+\newcommand{\bcenter}{\begin{center}}
+\newcommand{\ecenter}{\end{center}}
+
+% ── Correção de Idiomas e Anexo ───────────────────────────────────────────────
+% Evita que bookdown/pandoc sobrescrevam as traduções para o inglês.
+\AtBeginDocument{
+  \renewcommand{\figurename}{Figura}
+  \renewcommand{\tablename}{Tabela}
+  \renewcommand{\listfigurename}{Lista de Figuras}
+  \renewcommand{\listtablename}{Lista de Tabelas}
+  \renewcommand{\proofname}{Demonstração}
+  \renewcommand{\appendixname}{Apêndice}
+}
+
+% Definição de \anexo (similar ao \appendix da ppginf.cls)
+\makeatletter
+\newcommand{\@taganexo}{ANEXO}
+\newcommand{\anexo@chapter}[1]{%
+  \refstepcounter{chapter}%
+  \orig@chapter*{\@taganexo\ \@Alph\c@chapter\enskip -- \enskip\MakeUppercase{#1}}%
+  \addcontentsline{toc}{chapter}{\@taganexo\ \@Alph\c@chapter\enskip -- \enskip\uppercase{#1}}}%
+\newcommand{\anexo}{%
+  \setcounter{chapter}{0}%
+  \renewcommand{\thechapter}{\@Alph\c@chapter}%
+  \let\chapter\anexo@chapter%
+}
+\makeatother

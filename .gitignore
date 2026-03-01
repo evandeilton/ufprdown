@@ -1,0 +1,25 @@
+# R / RStudio
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+# macOS
+.DS_Store
+
+# Build / bookdown (skeleton: não versionar artefatos de render)
+inst/rmarkdown/templates/thesis/skeleton/_book/
+inst/rmarkdown/templates/thesis/skeleton/_bookdown_files/
+
+# Pasta de testes local (não versionar)
+thesis-teste/
+
+# LaTeX auxiliares (se algum build rodar na raiz)
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz

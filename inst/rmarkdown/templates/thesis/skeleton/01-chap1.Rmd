@@ -1,0 +1,140 @@
+# Fundamentação Teórica {#fundamentacao}
+
+Este capítulo apresenta os fundamentos teóricos necessários para o
+desenvolvimento dos modelos propostos nesta tese. Os exemplos abaixo mostram
+**como usar no texto**: (1) **figuras** e **tabelas** com legenda, descrição no
+corpo do texto e notas de rodapé quando necessário; (2) **referências cruzadas**
+a equações, definições, teoremas, tabelas e figuras com `\@ref()`.
+
+## A Distribuição Beta {#dist-beta}
+
+A distribuição beta é uma família contínua definida no intervalo $(0,1)$.
+A função densidade de probabilidade é dada pela Equação \@ref(eq:beta-pdf):
+
+\begin{equation}
+f(y; p, q) = \frac{1}{B(p,q)} y^{p-1}(1-y)^{q-1}, \quad 0 < y < 1
+(\#eq:beta-pdf)
+\end{equation}
+
+### Parametrização Média-Precisão
+
+Seguindo @ferrari2004beta, definimos $\mu = p/(p+q)$ e $\phi = p + q$. A
+Tabela \@ref(tab:parametrizacoes) resume as duas parametrizações usuais.
+
+```{r parametrizacoes, echo=FALSE}
+tab_param <- data.frame(
+  Parametrizacao = c("Clássica $(p, q)$", "Média-precião $(\\mu, \\phi)$"),
+  Media = c("$p/(p+q)$", "$\\mu$"),
+  Variancia = c("$\\frac{pq}{(p+q)^2(p+q+1)}$", "$\\frac{\\mu(1-\\mu)}{1+\\phi}$")
+)
+knitr::kable(tab_param,
+  caption = "Parametrizações da distribuição Beta.",
+  col.names = c("Parametrização", "Média", "Variância"),
+  escape = FALSE,
+  booktabs = TRUE
+)
+```
+
+*Nota:* Fonte: @ferrari2004beta. $B(p,q)$ e $\Gamma$ denotam a função beta e a função gama.
+
+A Tabela \@ref(tab:parametrizacoes) permite comparar a forma clássica e a
+parametrização média-precião. Na prática, a parametrização $(\mu, \phi)$
+facilita a interpretação: $\mu$ é a média da variável e $\phi$ controla a
+dispersão (maior $\phi$, menor variância).
+
+A densidade na parametrização $(\mu, \phi)$ é:
+
+$$
+f(y; \mu, \phi) = \frac{\Gamma(\phi)}{\Gamma(\mu\phi)\Gamma((1-\mu)\phi)}
+y^{\mu\phi - 1}(1-y)^{(1-\mu)\phi - 1}
+$$
+
+::: {.definition #defbeta}
+Uma variável aleatória $Y$ tem distribuição Beta com parâmetros $\mu$ e $\phi$
+se sua função densidade de probabilidade é dada pela Equação \@ref(eq:beta-pdf).
+:::
+
+::: {.theorem #teolem}
+A média e variância da distribuição Beta parametrizada por $\mu$ e $\phi$ são:
+$$
+\E(Y) = \mu, \quad \Var(Y) = \frac{\mu(1-\mu)}{1+\phi}
+$$
+:::
+
+::: {.proof}
+A demonstração segue das propriedades da função Gama e dos momentos da
+distribuição Beta clássica. A variância diminui à medida que o parâmetro de
+precisão $\phi$ aumenta.
+:::
+
+No texto, cite a **Definição** \@ref(def:defbeta) e o **Teorema** \@ref(thm:teolem)
+sempre que precisar remeter o leitor aos conceitos formais.
+
+A Figura \@ref(fig:densidade-beta) ilustra curvas de densidade para diferentes
+valores de $\mu$ e $\phi$, geradas a partir da Equação \@ref(eq:beta-pdf).
+
+```{r densidade-beta, fig.cap="Curvas de densidade da distribuição Beta para diferentes valores de média e precisão.", fig.height=4}
+# Exemplo de figura com legenda e nota de rodapé
+x <- seq(0.001, 0.999, length.out = 200)
+mu_vals <- c(0.3, 0.5, 0.7)
+phi_val <- 15
+df_plot <- data.frame(
+  x = rep(x, length(mu_vals)),
+  mu = rep(mu_vals, each = length(x)),
+  dens = c(
+    dbeta(x, mu_vals[1] * phi_val, (1 - mu_vals[1]) * phi_val),
+    dbeta(x, mu_vals[2] * phi_val, (1 - mu_vals[2]) * phi_val),
+    dbeta(x, mu_vals[3] * phi_val, (1 - mu_vals[3]) * phi_val)
+  )
+)
+df_plot$mu_lab <- factor(paste0("mu == ", df_plot$mu),
+  levels = paste0("mu == ", mu_vals)
+)
+if (requireNamespace("ggplot2", quietly = TRUE)) {
+  ggplot2::ggplot(df_plot, ggplot2::aes(x = x, y = dens, colour = mu_lab)) +
+    ggplot2::geom_line(linewidth = 1) +
+    ggplot2::scale_color_brewer(palette = "Set1", labels = scales::label_parse()) +
+    ggplot2::labs(x = "y", y = "Densidade", colour = expression(mu)) +
+    ggplot2::theme_minimal() +
+    ggplot2::theme(legend.position = "top")
+} else {
+  plot(x, dbeta(x, 0.3 * phi_val, 0.7 * phi_val), type = "l", col = "darkblue",
+       xlab = "y", ylab = "Densidade", main = "")
+  lines(x, dbeta(x, 0.5 * phi_val, 0.5 * phi_val), col = "darkred")
+  lines(x, dbeta(x, 0.7 * phi_val, 0.3 * phi_val), col = "darkgreen")
+  legend("topright", legend = c("mu=0.3", "mu=0.5", "mu=0.7"),
+         col = c("darkblue", "darkred", "darkgreen"), lty = 1)
+}
+```
+
+A Figura \@ref(fig:densidade-beta) mostra que, para um mesmo $\phi$, o
+parâmetro $\mu$ desloca o pico da densidade; valores de $\mu$ próximos de 0,5
+produzem curvas mais simétricas. *Nota de rodapé (figura):* Elaboração do autor com R (pacote ggplot2); $\phi$ fixo para ilustrar o efeito de $\mu$. Use sempre uma **frase de descrição** após a figura ou tabela e, se necessário, uma nota explicativa.
+
+## Modelos de Regressão Beta {#reg-beta}
+
+O modelo de regressão beta [@ferrari2004beta] assume uma função de ligação
+$g$ relacionando a média $\mu_i$ às covariáveis, conforme a equação abaixo.
+Referencie equações no texto com `\@ref(eq:label)`.
+
+\begin{equation}
+g(\mu_i) = \mathbf{x}_i^\top \boldsymbol{\beta}
+(\#eq:link-reg)
+\end{equation}
+
+A Equação \@ref(eq:link-reg) é a base dos modelos de regressão para
+proporções. Funções de ligação comuns incluem logito, probito e log-log.
+
+## Modelos Mistos Generalizados {#glmm}
+
+A verossimilhança marginal envolve a integração sobre os efeitos aleatórios:
+
+\begin{equation}
+L(\boldsymbol{\theta}) = \prod_{i=1}^{m} \int_{\mathbb{R}^q}
+f(\mathbf{y}_i | \mathbf{b}_i; \boldsymbol{\theta})
+f(\mathbf{b}_i; \mathbf{D}) \, d\mathbf{b}_i
+(\#eq:veross-marg)
+\end{equation}
+
+A Equação \@ref(eq:veross-marg) não possui forma fechada em geral; por isso
+utilizam-se aproximações numéricas (AGHQ, QMC) ou analíticas (Laplace).

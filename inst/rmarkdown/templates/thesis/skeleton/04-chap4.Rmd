@@ -1,0 +1,96 @@
+# Resultados e Discussão {#resultados}
+
+Este capítulo apresenta os resultados das simulações e aplicações. Use
+**referências cruzadas** para amarrar o texto: equações (\@ref(eq:...)),
+definições (\@ref(def:...)), teoremas (\@ref(thm:...)), tabelas
+(\@ref(tab:...)), figuras (\@ref(fig:...)) e algoritmos (\@ref(alg:...)).
+
+O modelo gerador foi baseado na distribuição definida na Equação
+\@ref(eq:beta-pdf) e nas propriedades do Teorema \@ref(thm:teolem). A
+Tabela \@ref(tab:tabela-demo) e a Figura \@ref(fig:simulacao-demo) (no
+Capítulo \@ref(metodologia)) ilustram o comportamento dos estimadores.
+
+## Resultados das Simulações
+
+A Tabela \@ref(tab:tabela-demo) apresenta viés relativo, EQM e cobertura
+do intervalo de confiança 95\% para os parâmetros do modelo. A **legenda**
+contém o título e uma **nota de rodapé** com a definição do cenário; o
+parágrafo seguinte **descreve** os resultados.
+
+```{r tabela-demo, echo=FALSE}
+tab <- data.frame(
+  Parametro = c("$\\beta_0$", "$\\beta_1$", "$\\sigma^2_b$"),
+  Vies = c("0,12\\%", "-0,05\\%", "1,23\\%"),
+  EQM = c("0,0012", "0,0008", "0,0045"),
+  Cobertura = c("94,8\\%", "95,2\\%", "93,1\\%")
+)
+knitr::kable(tab,
+  caption = "Resultados de simulação (cenário I): viés relativo, EQM e cobertura do IC 95%.",
+  col.names = c("Parâmetro", "Viés rel. (\\%)", "EQM", "Cobertura IC 95\\%"),
+  escape = FALSE,
+  align = "lccc",
+  booktabs = TRUE
+)
+```
+
+*Nota:* Cenário I: n = 100 grupos, m_i = 5 observações por grupo. EQM: erro quadrático médio. Fonte: o autor.
+
+A Tabela \@ref(tab:tabela-demo) indica que os estimadores apresentam baixo
+viés e cobertura próxima do nominal (95\%). O parâmetro de efeito aleatório
+($\sigma^2_b$) tem cobertura ligeiramente menor, o que é comum em amostras
+de tamanho moderado.
+
+## Algoritmo Proposto
+
+Para a estimação dos parâmetros, utilizou-se o Algoritmo \@ref(alg:em-algo).
+A verossimilhança marginal (Equação \@ref(eq:veross-marg)) é aproximada
+numericamente no E-step.
+
+\begin{algorithm}[H]
+\caption{Algoritmo EM para estimação em modelos beta mistos}
+\label{alg:em-algo}
+\begin{algorithmic}[1]
+\REQUIRE Valores iniciais $\btheta^{(0)}$
+\STATE $t \leftarrow 0$
+\WHILE{não convergir}
+  \STATE E-step: Calcular $Q(\btheta \mid \btheta^{(t)}) = \mathbb{E}[\ell_c(\btheta) \mid \mathbf{y}; \btheta^{(t)}]$
+  \STATE M-step: $\btheta^{(t+1)} \leftarrow \arg\max_{\btheta} Q(\btheta \mid \btheta^{(t)})$
+  \STATE $t \leftarrow t + 1$
+\ENDWHILE
+\RETURN $\hat{\btheta} = \btheta^{(t)}$
+\end{algorithmic}
+\end{algorithm}
+
+O Algoritmo \@ref(alg:em-algo) repete o E-step e o M-step até convergência.
+Referencie algoritmos no texto com `\@ref(alg:label)`.
+
+## Figura de Resultados
+
+A Figura \@ref(fig:resultados-demo) ilustra um exemplo de gráfico de
+resultados (ajuste do modelo). A legenda inclui título e nota de rodapé;
+o texto abaixo da figura descreve o que o leitor deve observar.
+
+```{r resultados-demo, echo=FALSE, fig.cap="Valores observados versus valores ajustados no exemplo de regressão beta.", fig.height=4}
+set.seed(42)
+n <- 80
+x <- runif(n, -1, 1)
+mu <- plogis(0.5 - 0.3 * x)
+phi <- 20
+y <- rbeta(n, mu * phi, (1 - mu) * phi)
+# Ajuste aproximado para demonstração
+fit_mu <- mu + rnorm(n, 0, 0.03)
+fit_mu <- pmax(0.01, pmin(0.99, fit_mu))
+plot(y, fit_mu, pch = 19, col = rgb(0,0,0.5,0.6),
+     xlab = "Valor observado", ylab = "Valor ajustado",
+     xlim = c(0, 1), ylim = c(0, 1))
+abline(0, 1, lty = 2, col = "gray40", lwd = 2)
+```
+
+A Figura \@ref(fig:resultados-demo) mostra a relação entre valores
+observados e ajustados. *Nota:* Linha tracejada: identidade (ajuste perfeito). Fonte: o autor. Pontos próximos da linha tracejada indicam bom ajuste. Em um capítulo real, inclua análise crítica e comparação com a literatura.
+
+## Discussão
+
+Sintetize aqui como os resultados se relacionam com a fundamentação
+(Equação \@ref(eq:link-reg), Teorema \@ref(thm:teolem)) e com a
+revisão de literatura (@ferrari2004beta; @cribari2010beta).

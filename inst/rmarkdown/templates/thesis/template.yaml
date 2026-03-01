@@ -1,0 +1,5 @@
+name: Tese UFPR
+description: >
+  Template para produção de teses e dissertações na Universidade Federal do
+  Paraná (UFPR) usando R Markdown e o pacote bookdown, baseado na classe
+  LaTeX ppginf.cls do PPGInf/UFPR.

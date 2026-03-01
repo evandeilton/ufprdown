@@ -1,0 +1,80 @@
+# Metodologia {#metodologia}
+
+Este capítulo descreve a metodologia proposta para modelos de regressão
+beta com efeitos aleatórios. As **figuras** devem ter: (1) legenda com
+título e, se necessário, nota de rodapé em `fig.cap`; (2) referência no
+texto com `\@ref(fig:label)`; (3) parágrafo descrevendo e interpretando a
+figura.
+
+## Formulação do Modelo {#desenvolvimento}
+
+Considere $y_{ij}$ a resposta do $j$-ésimo indivíduo no $i$-ésimo grupo.
+Condicionalmente aos efeitos aleatórios $\mathbf{b}_i$, assumimos a
+distribuição Beta (Definição \@ref(def:defbeta)):
+
+$$
+y_{ij} | \mathbf{b}_i \sim \text{Beta}(\mu_{ij}, \phi_{ij})
+$$
+
+com função de ligação (Equação \@ref(eq:link-reg)):
+
+$$
+g(\mu_{ij}) = \mathbf{x}_{ij}^\top \boldsymbol{\beta} +
+\mathbf{z}_{ij}^\top \mathbf{b}_i
+$$
+
+## Exemplo com R {#exemplo-r}
+
+A Figura \@ref(fig:simulacao-demo) mostra um histograma de dados simulados
+a partir da distribuição Beta com parâmetros $\mu = 0{,}3$ e $\phi = 30$,
+ilustrando a forma da densidade já apresentada na Figura \@ref(fig:densidade-beta).
+
+```{r simulacao-demo, echo=TRUE, fig.cap="Histograma de dados simulados da distribuição Beta (mu = 0,3, phi = 30).", fig.height=4}
+set.seed(2026)
+n <- 500
+mu <- 0.3
+phi <- 30
+y <- rbeta(n, mu * phi, (1 - mu) * phi)
+
+hist(y,
+  breaks = 30, col = "steelblue", border = "white",
+  main = "", xlab = "y", ylab = "Frequência",
+  probability = TRUE
+)
+curve(dbeta(x, mu * phi, (1 - mu) * phi),
+  add = TRUE, col = "red", lwd = 2
+)
+```
+
+A Figura \@ref(fig:simulacao-demo) confirma que a amostra simulada segue a
+densidade teórica. *Nota:* Simulação com set.seed(2026); a curva vermelha é a densidade teórica. Fonte: o autor. O uso de `echo=TRUE` neste chunk serve apenas como exemplo didático; em geral, figuras de resultados devem usar `echo=FALSE`.
+
+A Tabela \@ref(tab:parametros-sim) descreve os parâmetros utilizados na
+simulação e na geração dos dados da Figura \@ref(fig:simulacao-demo).
+
+```{r parametros-sim, echo=FALSE}
+tab_sim <- data.frame(
+  Parametro = c("$n$", "$\\mu$", "$\\phi$", "semente"),
+  Valor = c("500", "0,3", "30", "2026"),
+  Descricao = c("Tamanho da amostra", "Média da distribuição",
+    "Parâmetro de precisão", "Reprodutibilidade")
+)
+knitr::kable(tab_sim,
+  caption = "Parâmetros da simulação do exemplo (Seção de Exemplo com R).",
+  col.names = c("Parâmetro", "Valor", "Descrição"),
+  escape = FALSE,
+  booktabs = TRUE
+)
+```
+
+*Nota:* Fonte: o autor.
+
+A Tabela \@ref(tab:parametros-sim) documenta os valores usados no código
+acima, facilitando a reprodução dos resultados. Sempre que uma figura ou
+tabela depender de parâmetros, documente-os em tabela ou no texto.
+
+## Estudo de Simulação
+
+Cenários de simulação e métricas de avaliação (viés, EQM, cobertura)
+serão apresentados no Capítulo \@ref(resultados), com tabelas no formato
+da Tabela \@ref(tab:tabela-demo).

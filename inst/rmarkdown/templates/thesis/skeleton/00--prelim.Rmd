@@ -1,0 +1,11 @@
+# Elementos Pré-textuais {-}
+
+## Dedicatória {-}
+
+*Dedico esta tese a Deus e à minha querida esposa Dorinha.*
+
+## Agradecimentos {-}
+
+Agradeço a todos que colaboraram para a realização deste trabalho.
+
+`r if(!knitr:::is_latex_output()) '## Resumo {-}'`

@@ -1,0 +1,199 @@
+% =============================================================================
+% template.tex — Template LaTeX para bookdown/ufprdown
+% Usa a classe ppginf.cls (oficial PPGInf/UFPR). O arquivo .cls NÃO deve ser
+% modificado, pois contém os padrões de formatação da UFPR.
+% =============================================================================
+
+% ─── CONFIGURAÇÃO DA CLASSE ─────────────────────────────────────────────────
+% Pacote exigido pela ppginf.cls (oficial PPGInf) em modo defesa
+\RequirePackage{comment}
+$if(doc_mode)$
+\documentclass[$doc_mode$,oneside,english,brazilian]{ppginf}
+$else$
+\documentclass[defesa,oneside,english,brazilian]{ppginf}
+$endif$
+
+% ─── PACOTES ────────────────────────────────────────────────────────────────
+\input{setup/packages}
+
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+% Comandos auxiliares para bookdown/pandoc
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Compatibilidade com pandoc citeproc (pandoc >= 3.x)
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+% CSLReferences: ambiente para referências geradas pelo pandoc-citeproc.
+% Não usa list (que exige \item); pandoc >= 3.x não emite \item aqui.
+\ifdefined\CSLReferences
+\else
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\par\setlength{\parskip}{#2\baselineskip}%
+  \ifodd #1
+    \setlength{\leftskip}{\cslhangindent}%
+    \setlength{\parindent}{-\cslhangindent}%
+  \fi}
+ {\par}
+\fi
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+% ─── INÍCIO DO DOCUMENTO ────────────────────────────────────────────────────
+\begin{document}
+
+% ─── METADADOS ──────────────────────────────────────────────────────────────
+
+\title{$title$}
+
+$if(palavras-chave)$
+\pchave{$palavras-chave$}
+$endif$
+$if(keywords)$
+\keyword{$keywords$}
+$endif$
+
+\author{$author$}
+\advisor{$advisor$}
+$if(coadvisor)$
+\coadvisor{$coadvisor$}
+$endif$
+
+$if(institution)$
+\instit{$inst_short$}{$institution$}
+$else$
+\instit{UFPR}{Universidade Federal do Paraná}
+$endif$
+
+$if(field)$
+\field{$field$}
+$else$
+\field{Ciência da Computação}
+$endif$
+
+\date{$date_year$}
+
+$if(local)$
+\local{$local$}
+$else$
+\local{Curitiba PR}
+$endif$
+
+$if(coverimage)$
+\coverimage{$coverimage$}
+$endif$
+
+$if(descr)$
+\descr{$descr$}
+$else$
+\descr{$doc_type$ apresentada como requisito parcial à obtenção do grau de $degree$ no $course$, da $institution$.}
+$endif$
+
+% =============================================================================
+% PARTE PRÉ-TEXTUAL
+% =============================================================================
+
+\frontmatter
+\pagestyle{frontmatter}
+
+\titlepage
+
+% Ficha catalográfica (só na versão final)
+$if(final_mode)$
+\begin{ficha}
+\includepdf[noautoscale]{Ficha_Catalografica.pdf}
+\end{ficha}
+$endif$
+
+% Folha de aprovação (só na versão final)
+$if(final_mode)$
+\begin{aprovacao}
+\includepdf[noautoscale]{aprovacao.pdf}
+\end{aprovacao}
+$endif$
+
+% Dedicatória (só na versão final)
+$if(final_mode)$
+$if(dedication)$
+\begin{dedica}
+$dedication$
+\end{dedica}
+$endif$
+$endif$
+
+% Agradecimentos (só na versão final)
+$if(final_mode)$
+$if(thanks)$
+\begin{agradece}
+$thanks$
+\end{agradece}
+$endif$
+$endif$
+
+% Resumo (palavras-chave são inseridas automaticamente pelo ppginf.cls
+% através dos comandos \pchave{} e \keyword{} definidos acima)
+$if(abstract)$
+\begin{resumo}
+$abstract$
+\end{resumo}
+$endif$
+
+% Abstract
+$if(foreignabstract)$
+\begin{abstract}
+$foreignabstract$
+\end{abstract}
+$endif$
+
+% Listas
+\listoffigures
+\clearpage
+\listoftables
+\clearpage
+\listofquadros
+\include{lista_siglas}
+\include{lista_simbolos}
+\tableofcontents
+
+% =============================================================================
+% CORPO DO DOCUMENTO
+% =============================================================================
+
+\mainmatter
+\pagestyle{mainmatter}
+
+$body$
+
+% =============================================================================
+% REFERÊNCIAS (processadas pelo pandoc citeproc)
+% =============================================================================
+
+$for(include-after)$
+$include-after$
+$endfor$
+
+% =============================================================================
+
+\end{document}

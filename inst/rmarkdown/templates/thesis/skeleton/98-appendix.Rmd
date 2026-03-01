@@ -1,0 +1,30 @@
+`r if(knitr:::is_latex_output()) '\\appendix'`
+
+# Demonstrações e Provas Matemáticas {#ap-provas}
+
+**TODO:** Incluir provas dos teoremas.
+
+# Código Computacional {#ap-codigo}
+
+```{r exemplo-betaregscale, echo=TRUE, eval=FALSE}
+library(betaregscale)
+
+# Simular dados
+set.seed(2026)
+n_groups <- 50
+n_obs <- 10
+N <- n_groups * n_obs
+group <- rep(1:n_groups, each = n_obs)
+x1 <- rnorm(N)
+b <- rnorm(n_groups, sd = 0.5)
+eta <- 0.5 - 0.3 * x1 + b[group]
+mu <- plogis(eta)
+y <- rbeta(N, mu * 30, (1 - mu) * 30)
+
+# Ajustar modelo
+fit <- betaregscale(y ~ x1 | 1 | group,
+    data = data.frame(y, x1, group),
+    link = "logit", integration = "AGHQ", n_points = 7
+)
+summary(fit)
+```

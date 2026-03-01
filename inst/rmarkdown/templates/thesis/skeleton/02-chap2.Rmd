@@ -1,0 +1,51 @@
+# Revisão de Literatura {#revisao}
+
+Este capítulo apresenta uma revisão da literatura sobre modelos de regressão
+beta e suas extensões. Use **citações no texto** com `@autor2020` ou
+`[@autor2020]` e **referências a tabelas/quadros** com `\@ref(tab:label)` ou
+`\@ref(qua:label)`.
+
+## Modelos de Regressão Beta na Literatura
+
+A regressão beta foi proposta por @ferrari2004beta como alternativa para
+modelar variáveis contínuas no intervalo $(0,1)$. A definição formal utilizada
+neste trabalho está na Definição \@ref(def:defbeta) do Capítulo \@ref(fundamentacao).
+
+## Modelos Beta com Efeitos Aleatórios
+
+A extensão com efeitos aleatórios está ligada à verossimilhança marginal
+(Equação \@ref(eq:veross-marg)) e a métodos de integração numérica.
+
+## Dados de Escala: NRS e Likert
+
+Instrumentos como NRS e Likert produzem dados ordinais que, após
+transformação, podem ser modelados no intervalo $(0,1)$ [@ferrari2004beta].
+
+## Software Estatístico
+
+O Quadro \@ref(tab:quadro-software) compara ferramentas de software para
+regressão beta. A **legenda** do quadro traz o título; a **nota de rodapé**
+(^[ ] no caption) esclarece siglas ou fontes; a **descrição** no parágrafo
+seguinte interpreta o conteúdo para o leitor.
+
+```{r quadro-software, echo=FALSE}
+tab_soft <- data.frame(
+  Ferramenta = c("betareg", "betaregscale"),
+  Foco = c("Regressão Beta Padrão", "Modelos de Escala + Efeitos Aleatórios"),
+  Estimacao = c("Máxima Verossimilhança", "AGHQ e EM")
+)
+knitr::kable(tab_soft,
+  caption = "Comparativo de ferramentas de software para regressão beta.",
+  col.names = c("Ferramenta", "Foco Principal", "Estimação"),
+  booktabs = TRUE
+)
+```
+
+*Nota:* AGHQ: quadratura de Gauss-Hermite adaptativa; EM: algoritmo esperança-maximização. Fonte: documentação dos pacotes e o autor.
+
+O Quadro \@ref(tab:quadro-software) resume as diferenças entre o pacote
+`betareg` [@cribari2010beta], que implementa o modelo clássico da Equação
+\@ref(eq:link-reg), e o pacote `betaregscale`, que estende o framework para
+dados de escala e efeitos aleatórios. A escolha da ferramenta depende do tipo
+de dado (proporções contínuas vs.~escalas discretas) e da necessidade de
+estrutura hierárquica (efeitos aleatórios).

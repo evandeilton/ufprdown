@@ -1,0 +1,184 @@
+---
+# =============================================================================
+# METADADOS DA TESE — UFPR
+# Edite os campos abaixo com seus dados pessoais e do programa.
+# =============================================================================
+
+# ─── AUTORIA ────────────────────────────────────────────────────────────────
+author: 'José Evandeilton Lopes'
+advisor: 'Prof. Wagner Hugo Bonat, PhD'
+# coadvisor: 'Nome do Coorientador'
+
+# ─── INSTITUIÇÃO ────────────────────────────────────────────────────────────
+institution: 'Universidade Federal do Paraná'
+inst_short: 'UFPR'
+field: 'Métodos Numéricos em Engenharia'
+local: 'Curitiba PR'
+date_year: '2026'
+lang: 'pt-BR'
+
+# ─── TIPO DE DOCUMENTO ─────────────────────────────────────────────────────
+doc_type: 'Tese'
+level: 'doutorado'
+degree: 'Doutor em Ciências'
+course: 'Programa de Pós-Graduação em Métodos Numéricos em Engenharia, Setor de Ciências Exatas e de Tecnologia'
+
+# ─── DESCRIÇÃO PARA FOLHA DE ROSTO ─────────────────────────────────────────
+# Se 'descr' estiver definido, ele substitui a geração automática.
+# Caso contrário, o template gera a descrição usando doc_type, degree, course e institution.
+# descr: >
+#   Tese apresentada como requisito parcial à obtenção do grau de Doutor em
+#   Ciências no Programa de Pós-Graduação em Métodos Numéricos em Engenharia,
+#   Setor de Ciências Exatas e de Tecnologia, da Universidade Federal do Paraná
+
+# ─── VERSÃO DO DOCUMENTO ───────────────────────────────────────────────────
+# Opções: 'defesa' ou 'final'
+doc_mode: 'defesa'
+# Mude para true na versão final (pós-defesa) para incluir ficha
+# catalográfica, folha de aprovação, dedicatória e agradecimentos
+final_mode: false
+
+# ─── CAPA ───────────────────────────────────────────────────────────────────
+coverimage: 'setup/fundo-capa.png'
+
+# ─── TÍTULO ─────────────────────────────────────────────────────────────────
+title: >
+  Modelos de Regressão Beta com Efeitos Aleatórios para Dados de Escala:
+  Teoria, Métodos e Aplicações
+
+# ─── PALAVRAS-CHAVE ─────────────────────────────────────────────────────────
+palavras-chave: >
+  Regressão beta. Efeitos mistos. Dados de escala.
+  Escalas NRS e Likert. Pseudo-verossimilhança.
+keywords: >
+  Beta regression. Mixed effects. Scale data.
+  NRS and Likert scales. Pseudo-likelihood.
+
+# ─── RESUMO / ABSTRACT ─────────────────────────────────────────────────────
+abstract: |
+  `r if(knitr:::is_latex_output()) paste(readLines("00-abstract.Rmd"),
+  collapse = '\n  ')`
+foreignabstract: |
+  `r if(knitr:::is_latex_output()) paste(readLines("00-foreignabstract.Rmd"),
+  collapse = '\n  ')`
+
+# ─── DEDICATÓRIA / AGRADECIMENTOS ──────────────────────────────────────────
+# Não use "| " no início de cada linha em thanks/dedication (gera \item no LaTeX e erro em modo final).
+dedication: |
+  \textit{Dedico esta tese a Deus, fonte de toda sabedoria,
+  e à minha querida esposa, Dorinha, companheira de todos os momentos.}
+thanks: |
+  Agradeço a Deus pela saúde e perseverança concedidas.
+  Ao meu orientador, Professor Dr. Wagner Hugo Bonat, pela orientação dedicada.
+  À minha esposa, Dorinha, pelo apoio incondicional.
+  Aos membros da banca examinadora, pelas valiosas contribuições.
+  Aos colegas do PPGMNE/UFPR, pelo companheirismo.
+
+# ─── CONFIGURAÇÃO DO BOOKDOWN ──────────────────────────────────────────────
+knit: "bookdown::render_book"
+site: bookdown::bookdown_site
+output:
+  ufprdown::thesis_pdf:
+    latex_engine: pdflatex
+
+# ─── BIBLIOGRAFIA ──────────────────────────────────────────────────────────
+bibliography: ["bib/thesis.bib", "bib/references.bib", "bib/pkgs.bib"]
+csl: csl/apa.csl
+link-citations: yes
+---
+
+<!--
+Este arquivo é o index.Rmd do projeto bookdown. Contém o YAML principal
+e a Introdução da tese. Os demais capítulos estão em arquivos separados,
+listados em _bookdown.yml.
+-->
+
+```{r include_packages, include=FALSE}
+knitr::opts_chunk$set(
+  echo      = FALSE,
+  cache     = FALSE,
+  message   = FALSE,
+  warning   = FALSE,
+  fig.ext   = "pdf",
+  fig.align = "center",
+  fig.path  = "images/",
+  fig.pos   = "H",
+  dev       = "pdf",
+  dpi       = 300,
+  out.width = "80%"
+)
+
+# Garante que o pacote ufprdown está disponível
+if (!require(ufprdown)) {
+  if (!require(remotes)) install.packages("remotes")
+  remotes::install_local(".")
+  library(ufprdown)
+}
+```
+
+# Introdução {#intro}
+
+Esta tese investiga modelos de regressão beta com efeitos aleatórios para
+a análise de dados de escala, tais como aqueles obtidos por meio de
+instrumentos como a *Numerical Rating Scale* (NRS) e escalas *Likert*.
+
+## Motivação e Contexto
+
+A avaliação da dor em contextos clínicos é frequentemente realizada por
+meio de escalas numéricas ou visuais analógicas. Estes instrumentos produzem
+dados que, após transformação adequada, podem ser modelados no intervalo $(0,1)$.
+
+**TODO:** Expandir motivação com referências.
+
+## Objetivos
+
+### Objetivo Geral
+
+Desenvolver, implementar e validar modelos de regressão beta com efeitos
+aleatórios para a análise de dados de escala.
+
+### Objetivos Específicos
+
+1. Estender os modelos de regressão beta com efeitos aleatórios multivariados;
+2. Desenvolver métodos de estimação baseados em pseudo-verossimilhança;
+3. Implementar integração numérica via AGHQ e QMC;
+4. Validar por simulações Monte Carlo;
+5. Aplicar a dados reais de avaliação de dor;
+6. Disponibilizar no pacote R `betaregscale`.
+
+## Contribuições da Tese
+
+- Formulação teórica de modelos beta mistos para dados de escala
+- Algoritmos eficientes de estimação via AGHQ e QMC
+- Pacote R `betaregscale` no CRAN
+- Estudos de simulação extensivos
+- Aplicações clínicas
+
+## Organização do Documento
+
+- **Capítulo \@ref(fundamentacao)**: Fundamentação teórica
+- **Capítulo \@ref(revisao)**: Revisão de literatura
+- **Capítulo \@ref(metodologia)**: Metodologia
+- **Capítulo \@ref(resultados)**: Resultados e discussão
+- **Capítulo \@ref(conclusao)**: Conclusão
+
+## Uso dos elementos textuais neste template
+
+Os capítulos seguintes trazem **exemplos didáticos** de como usar os
+elementos textuais na tese:
+
+- **Tabelas e quadros**: legenda (título) no `caption` do `kable()`;
+  nota explicativa no parágrafo seguinte (ex.: *Nota:* Fonte: ...);
+  parágrafo de descrição interpretando a tabela; referência com
+  `\@ref(tab:label)` ou `\@ref(qua:label)`.
+- **Figuras**: `fig.cap = "Título da figura."` no chunk; descrição e
+  nota no parágrafo seguinte (*Nota:* ...); referência com `\@ref(fig:label)`.
+- **Equações**: use `(\#eq:label)` após a equação e cite com
+  `\@ref(eq:label)`.
+- **Teoremas, definições, proposições**: ambientes `::: {.theorem #id}`;
+  cite com `\@ref(thm:id)`, `\@ref(def:id)`, etc.
+- **Algoritmos**: ambiente LaTeX `algorithm` com `\label{alg:id}`;
+  cite com `\@ref(alg:id)`.
+- **Citações bibliográficas**: `@autor2020` ou `[@autor2020]`; a
+  lista de referências é gerada automaticamente a partir dos arquivos
+  em `bibliography` no YAML.

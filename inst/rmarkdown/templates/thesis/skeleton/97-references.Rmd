@@ -1,0 +1,11 @@
+<!--
+Este arquivo gera a seção de referências bibliográficas.
+Deve ser o último capítulo antes dos apêndices.
+-->
+
+```{r bib-packages, include=FALSE}
+# Gera citações para pacotes R usados
+knitr::write_bib(c("bookdown", "knitr", "rmarkdown"), "bib/pkgs.bib", width = 78)
+```
+
+\bibliography{bib/thesis.bib,bib/references.bib,bib/pkgs.bib}
