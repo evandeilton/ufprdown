@@ -27,7 +27,9 @@ Suggests:
     tinytex,
     kableExtra,
     ggplot2,
-    dplyr
+    dplyr,
+    testthat (>= 3.0.0)
 VignetteBuilder: knitr
 SystemRequirements: pandoc (>= 2.0) - http://pandoc.org
 RoxygenNote: 7.3.3
+Config/testthat/edition: 3
