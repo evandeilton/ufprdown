@@ -28,9 +28,6 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v2
 
       - uses: r-lib/actions/setup-tinytex@v2
-      
-      - name: Install TeX packages
-        run: tlmgr install psnfss babel-portuges hyphenat enumitem textcase setspace xcolor geometry fancyhdr hyperref bookmark microtype amsmath amsfonts booktabs multirow float lipsum pdfpages rotating caption iflang algorithms listings url cm-super
 
       - uses: r-lib/actions/setup-r@v2
         with:
@@ -40,6 +37,9 @@ jobs:
         with:
           extra-packages: any::pkgdown, local::.
           needs: website
+
+      - name: Install TeX packages
+        run: Rscript -e "tinytex::tlmgr_install(c('psnfss', 'babel-portuges', 'hyphenat', 'enumitem', 'textcase', 'setspace', 'xcolor', 'geometry', 'fancyhdr', 'hyperref', 'bookmark', 'microtype', 'amsmath', 'amsfonts', 'booktabs', 'multirow', 'float', 'lipsum', 'pdfpages', 'rotating', 'caption', 'iflang', 'algorithms', 'listings', 'url', 'cm-super', 'carlisle', 'slashed', 'algorithmicx', 'ec', 'knitr', 'rmarkdown'))"
 
       - name: Build site
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
