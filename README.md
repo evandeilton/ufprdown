@@ -1,3 +1,7 @@
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/evandeilton/ufprdown/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/evandeilton/ufprdown/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
 # ufprdown
 
 Pacote R para escrever teses, dissertações e Trabalhos de Conclusão de Curso na UFPR usando R Markdown e bookdown.
