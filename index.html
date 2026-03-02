@@ -75,13 +75,8 @@
 </h2>
 <p><strong>Pacotes R (obrigatórios):</strong> <code>bookdown</code>, <code>knitr</code>, <code>rmarkdown</code> (Declared in DESCRIPTION).</p>
 <p><strong>Origem do template:</strong> O ufprdown segue a mesma abordagem do <a href="https://github.com/ismayc/thesisdown" class="external-link">thesisdown</a> (Chester Ismay): um template R Markdown baseado em bookdown que gera um documento acadêmico a partir de uma classe LaTeX institucional. A estrutura e várias convenções foram inspiradas também no <a href="https://github.com/lfpdroubi/ufscdown" class="external-link">ufscdown</a> (Luiz Droubi), adaptadas para a UFPR.</p>
-<p><strong>Outros créditos:</strong></p>
-<ul>
-<li>Classe <strong>ppginf.cls</strong>: Prof. Carlos A. Maziero (DInf/UFPR) — template oficial PPGInf/UFPR.</li>
-<li>
-<a href="https://bookdown.org/" class="external-link">bookdown</a> (Yihui Xie).</li>
-</ul>
-<p>O ufprdown não é um fork de thesisdown ou ufscdown; é um pacote independente que reutiliza a ideia (bookdown + LaTeX institucional) e adapta o fluxo para a classe ppginf.cls da UFPR.</p>
+<p><strong>Template Base (LaTeX):</strong> - Classe <strong>ppginf.cls</strong>: Criada pelo Prof. Carlos A. Maziero (<a href="mailto:maziero@inf.ufpr.br" class="email">maziero@inf.ufpr.br</a>) — DInf/UFPR. - <strong>Fontes originais da classe:</strong> Disponíveis em seu <a href="http://wiki.inf.ufpr.br/maziero/doku.php?id=software:latex" class="external-link">Wiki</a> e no repositório do <a href="https://gitlab.c3sl.ufpr.br/maziero/tese" class="external-link">GitLab C3SL</a>. - <strong>Aprimoramentos do ufprdown:</strong> O pacote R <em>ufprdown</em> utiliza a base estrutural desenhada pelo professor Maziero e <strong>soluciona de forma automatizada (via R/Pandoc)</strong> diversas pendências listadas no repositório original da classe, tais como: - Geração automatizada das listas de símbolos e abreviações (diretamente geridas via YAML e Markdown); - Inteligência fluida no posicionamento de Ficha Catalográfica e Folhas de Aprovação dependendo do “modo final” x “modo defesa”; - Distribuição isolada de conteúdo em formato multi-arquivos para a produção veloz de capítulos via bookdown; - Diferenciação nativa entre “Tabelas” e “Quadros” na engine do RMarkdown; - Separação automatizada da contagem entre Apêndices e Anexos. - <a href="https://bookdown.org/" class="external-link">bookdown</a> (Yihui Xie).</p>
+<p>O ufprdown não é um fork direto do <code>thesisdown</code> ou <code>ufscdown</code>; é um pacote independente criado do zero que reutiliza a ideia da abstração do RMarkdown e a aplica à classe nativa <code>ppginf.cls</code> da UFPR solucionando o seu ecossistema.</p>
 <hr>
 </div>
 <div class="section level2">

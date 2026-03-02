@@ -915,8 +915,59 @@ preencher <code>thanks</code>/<code>dedication</code> sem
 </tr>
 </tbody>
 </table>
-<p>Para mais detalhes, consulte o <a href="https://github.com/evandeilton/ufprdown" class="external-link">README do pacote</a> e a
-documentação da classe <strong>ppginf.cls</strong> (PPGInf/UFPR).</p>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="origem-e-créditos">Origem e Créditos<a class="anchor" aria-label="anchor" href="#origem-e-cr%C3%A9ditos"></a>
+</h2>
+<p>O pacote <strong>ufprdown</strong> usa o RMarkdown e o ecossistema
+<code>bookdown</code> para entregar a abstração completa do template
+LaTeX do <strong>PPGInf/UFPR</strong>.</p>
+<p><strong>Template Base (LaTeX):</strong> - A classe
+<strong>ppginf.cls</strong> original foi criada e é mantida pelo
+<strong>Prof. Carlos A. Maziero</strong>
+(<code>maziero@inf.ufpr.br</code>). - Suas fontes originais, históricos
+e instruções em LaTeX puro podem ser encontradas em sua <a href="http://wiki.inf.ufpr.br/maziero/doku.php?id=software:latex" class="external-link">página
+no Wiki</a> e no repositório do <a href="https://gitlab.c3sl.ufpr.br/maziero/tese" class="external-link">GitLab C3SL</a>.</p>
+<p><strong>Aprimoramentos do pacote:</strong> O <em>ufprdown</em>
+abstrai a complexidade do LaTeX e resolve automatizadamente através da
+linguagem R e do Pandoc diversas “pendências” históricas listadas na
+estrutura do modelo original. Destacam-se as seguintes resoluções
+contempladas por este pacote:</p>
+<ul>
+<li>
+<strong>Gerenciamento de metadados via YAML:</strong> Você escreve
+seus dados apenas uma vez no arquivo principal.</li>
+<li>
+<strong>Geração nativa de Listas:</strong> Todas as listas de
+Siglas, Símbolos, Rótulos, bem como o Sumário, Ficha Catalográfica e
+Folha de Aprovação são invocados automaticamente.</li>
+<li>
+<strong>Inteligência de Modos:</strong> Ao alternar o parâmetro
+<code>doc_mode</code> entre <code>final</code> ou <code>defesa</code>, o
+ufprdown ativa e desativa (sem você saber LaTeX) a presença das páginas
+pré-textuais e de aprovações.</li>
+<li>
+<strong>Multi-arquivos:</strong> Distribuição isolada de conteúdo em
+arquitetura de capítulos do <code>bookdown</code>.</li>
+<li>
+<strong>Separação Quadros vs Tabelas:</strong> O template resolve a
+diferenciação semântica e tipográfica entre tabelas genéricas e quadros
+textuais dentro do engine do RMarkdown.</li>
+<li>
+<strong>Apêndices e Anexos independentes:</strong> Fluxos de
+contagem automatizados e divididos para Apêndices e Anexos.</li>
+</ul>
+<p>O ufprdown segue o conceito de pacotes pioneiros da cena
+internacional, como o <a href="https://github.com/ismayc/thesisdown" class="external-link">thesisdown</a> (Chester
+Ismay) e do brasileiro <a href="https://github.com/lfpdroubi/ufscdown" class="external-link">ufscdown</a> (Luiz Droubi).
+Ele, contudo, é um pacote desenvolvido do zero, pensado única e
+exclusivamente para lidar com a semântica da UFPR. E o mais importante:
+preserva de forma canônica os arquivos <code>.cls</code> originais do
+professor Maziero sem nenhuma adulteração. Para mais detalhes, consulte
+o <a href="https://github.com/evandeilton/ufprdown" class="external-link">README do pacote</a>
+e a documentação da classe <strong>ppginf.cls</strong>
+(PPGInf/UFPR).</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
