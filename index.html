@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ufprdown</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -163,10 +163,8 @@ Ficha_Catalografica.pdf, aprovacao.pdf</code></pre>
 <td>Tipo (Tese/Dissertação/Trabalho de Conclusão de Curso) e programa</td>
 </tr>
 <tr class="even">
-<td>
-<code>doc_mode</code>, <code>final_mode</code>
-</td>
-<td>Versão defesa vs. final</td>
+<td><code>final_mode</code></td>
+<td>Versão defesa (<code>false</code>) vs. versão final pós-defesa (<code>true</code>)</td>
 </tr>
 <tr class="odd">
 <td>
@@ -221,9 +219,9 @@ Ficha_Catalografica.pdf, aprovacao.pdf</code></pre>
 </h2>
 <ul>
 <li>
-<strong>defesa</strong> (<code>doc_mode: 'defesa'</code>, <code>final_mode: false</code>): espaçamento 1,5; sem ficha catalográfica, folha de aprovação, dedicatória ou agradecimentos.</li>
+<strong>defesa</strong> (<code>final_mode: false</code>): espaçamento 1,5; sem ficha catalográfica, folha de aprovação, dedicatória ou agradecimentos. Documento preparado para a primeira entrega pra banca.</li>
 <li>
-<strong>final</strong> (<code>doc_mode: 'final'</code>, <code>final_mode: true</code>): espaçamento simples; inclui todos os elementos pré-textuais.</li>
+<strong>final</strong> (<code>final_mode: true</code>): espaçamento simples; inclui todos os elementos pré-textuais e de assinatura necessários pós-banca.</li>
 </ul>
 Nos campos <code>thanks</code> e <code>dedication</code>, não use <code>|</code> no início de cada linha (o Pandoc gera lista e ocorre erro “Lonely
 <p>” no LaTeX). Use apenas quebra de linha após o <code>|</code>:</p>
@@ -258,7 +256,6 @@ Nos campos <code>thanks</code> e <code>dedication</code>, não use <code>|</code
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>José Evandeilton Lopes <br><small class="roles"> Maintainer, author </small>   </li>
-<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 

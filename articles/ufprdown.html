@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ufprdown</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -548,24 +548,17 @@ documento:</p>
 <th>Campo</th>
 <th>Descrição e Valores</th>
 </tr></thead>
-<tbody>
-<tr class="odd">
-<td><code>doc_mode</code></td>
-<td>
-<code>'defesa'</code>: Compila o texto com espaçamento 1,5, ideal
-para a banca ler. Oculta ficha catalográfica, aprovação, dedicatória e
-agradecimentos.<br><code>'final'</code>: Compila com espaçamento simples
-(padrão final UFPR) e exibe os itens pré-textuais.</td>
-</tr>
-<tr class="even">
+<tbody><tr class="odd">
 <td><code>final_mode</code></td>
 <td>
-<code>false</code>: Usado enquanto estiver escrevendo ou para a
-qualificação/defesa.<br><code>true</code>: Ativa a inclusão dos PDFs
-obrigatórios pós-defesa (ficha catalográfica e folha de assinaturas da
-banca).</td>
-</tr>
-</tbody>
+<code>false</code>: Compila o texto com espaçamento 1,5, ideal para
+a banca ler. Oculta ficha catalográfica, aprovação, dedicatória e
+agradecimentos. Usado enquanto estiver escrevendo ou para a
+qualificação/defesa.<br><code>true</code>: Compila com espaçamento
+simples (padrão final UFPR) e exibe os itens pré-textuais. Ativa a
+inclusão dos PDFs obrigatórios pós-defesa (ficha catalográfica e folha
+de assinaturas da banca).</td>
+</tr></tbody>
 </table>
 <strong>Importante (modo final):</strong> Nos campos <code>thanks</code>
 e <code>dedication</code>, <strong>não use <code>|</code> (pipe mais
@@ -885,16 +878,14 @@ Build Book no RStudio</td>
 </tr>
 <tr class="odd">
 <td>Versão defesa</td>
-<td>
-<code>doc_mode: 'defesa'</code>, <code>final_mode: false</code>
-</td>
+<td><code>final_mode: false</code></td>
 </tr>
 <tr class="even">
 <td>Versão final</td>
 <td>
-<code>doc_mode: 'final'</code>, <code>final_mode: true</code>;
-preencher <code>thanks</code>/<code>dedication</code> sem
-<code>\|</code> no início das linhas</td>
+<code>final_mode: true</code>; preencher
+<code>thanks</code>/<code>dedication</code> sem <code>\|</code> no
+início das linhas</td>
 </tr>
 <tr class="odd">
 <td>Dissertação/TCC</td>
@@ -944,9 +935,9 @@ Siglas, Símbolos, Rótulos, bem como o Sumário, Ficha Catalográfica e
 Folha de Aprovação são invocados automaticamente.</li>
 <li>
 <strong>Inteligência de Modos:</strong> Ao alternar o parâmetro
-<code>doc_mode</code> entre <code>final</code> ou <code>defesa</code>, o
-ufprdown ativa e desativa (sem você saber LaTeX) a presença das páginas
-pré-textuais e de aprovações.</li>
+<code>final_mode</code> entre <code>false</code> (banca) ou
+<code>true</code> (final), o ufprdown ativa e desativa (sem você saber
+LaTeX) a presença das páginas pré-textuais e de aprovações.</li>
 <li>
 <strong>Multi-arquivos:</strong> Distribuição isolada de conteúdo em
 arquitetura de capítulos do <code>bookdown</code>.</li>

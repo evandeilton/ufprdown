@@ -474,8 +474,8 @@ definições, etc.
 |----------------------|---------------------------------------------------------------------------------------------------------|
 | Criar projeto        | RStudio: New Project → Tese UFPR; ou `rmarkdown::draft(..., template = "thesis", package = "ufprdown")` |
 | Gerar PDF            | `render_book("index.Rmd", "ufprdown::thesis_pdf")` ou Build Book no RStudio                             |
-| Versão defesa        | `doc_mode: 'defesa'`, `final_mode: false`                                                               |
-| Versão final         | `doc_mode: 'final'`, `final_mode: true`; preencher `thanks`/`dedication` sem `\|` no início das linhas  |
+| Versão defesa        | `final_mode: false`                                                                                     |
+| Versão final         | `final_mode: true`; preencher `thanks`/`dedication` sem `\|` no início das linhas                       |
 | Dissertação/TCC      | Ajustar `doc_type`, `level`, `degree` e `course` no YAML                                                |
 | Referências cruzadas | `\@ref(fig:...)`, `\@ref(tab:...)`, `\@ref(eq:...)`, `\@ref(thm:...)`, etc.                             |
 | Citações             | `@chave` ou `[@chave]`; `bibliography` e `csl` no YAML                                                  |
@@ -505,9 +505,9 @@ pacote:
 - **Geração nativa de Listas:** Todas as listas de Siglas, Símbolos,
   Rótulos, bem como o Sumário, Ficha Catalográfica e Folha de Aprovação
   são invocados automaticamente.
-- **Inteligência de Modos:** Ao alternar o parâmetro `doc_mode` entre
-  `final` ou `defesa`, o ufprdown ativa e desativa (sem você saber
-  LaTeX) a presença das páginas pré-textuais e de aprovações.
+- **Inteligência de Modos:** Ao alternar o parâmetro `final_mode` entre
+  `false` (banca) ou `true` (final), o ufprdown ativa e desativa (sem
+  você saber LaTeX) a presença das páginas pré-textuais e de aprovações.
 - **Multi-arquivos:** Distribuição isolada de conteúdo em arquitetura de
   capítulos do `bookdown`.
 - **Separação Quadros vs Tabelas:** O template resolve a diferenciação
