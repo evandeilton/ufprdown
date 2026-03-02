@@ -1,146 +1,127 @@
-# ufprdown <img src="man/figures/logo.png" align="right" height="120" />
+# ufprdown
 
-<!-- badges: start -->
-<!-- badges: end -->
+Pacote R para escrever teses, dissertações e Trabalhos de Conclusão de Curso na UFPR usando R Markdown e bookdown.
 
-**Pacote R para escrever teses e dissertações na UFPR usando R Markdown.**
+O **ufprdown** usa o [bookdown](https://bookdown.org/) e a classe LaTeX oficial **ppginf.cls** do [PPGInf/UFPR](https://www.prppg.ufpr.br/site/ppginf/) para gerar documentos no formato exigido pela Universidade Federal do Paraná, com código R embutido para análises e figuras reprodutíveis.
 
-O `ufprdown` utiliza o [bookdown](https://bookdown.org/) e a classe LaTeX
-`ppginf.cls` do [PPGInf/UFPR](https://www.inf.ufpr.br/ppginf/) para gerar
-documentos acadêmicos no formato exigido pela Universidade Federal do Paraná,
-com código R embutido para análises e gráficos reprodutíveis.
+O arquivo **ppginf.cls** é o template oficial do PPGInf/UFPR e não deve ser modificado (margens, capa, folha de rosto, listas, numeração). O pacote inclui uma cópia idêntica; personalizações devem ser feitas apenas no YAML, em `template.tex` ou em `setup/packages.tex`.
 
-**Importante:** O arquivo `ppginf.cls` é o template oficial do PPGInf/UFPR e
-**não deve ser modificado** — ele contém os padrões de formatação da UFPR
-(margens, capa, folha de rosto, listas, numeração etc.). O pacote ufprdown
-utiliza uma cópia idêntica da classe oficial; personalizações devem ser feitas
-apenas no YAML, no `template.tex` ou em `setup/packages.tex`.
+---
 
-## ✨ Funcionalidades
+## Funcionalidades
 
-- 📄 **PDF** seguindo o template oficial da UFPR (`ppginf.cls`)
-- 🌐 **HTML** interativo via gitbook
-- 📝 **Word** para revisão
-- 📱 **epub** para leitura em dispositivos móveis
-- 🔬 **Reprodutível**: código R embutido gera gráficos e tabelas automaticamente
-- 🎨 **Capa** com imagem de fundo personalizável
-- 📚 **Bibliografia** no formato ABNT/apalike-ptbr
+- **PDF** no padrão UFPR (ppginf.cls)
+- **HTML** (gitbook) para leitura no navegador
+- **Word** e **epub** para revisão e leitura em outros dispositivos
+- Modos **defesa** e **final** (espaçamento e elementos pré-textuais configuráveis)
+- Tipos de documento: Tese, Dissertação, Trabalho de Conclusão de Curso, Qualificação
+- Capa com imagem de fundo personalizável
+- Bibliografia com estilo configurável (CSL) e referências em português (apalike-ptbr)
 
-## 📦 Instalação
+---
+
+## Dependências e créditos
+
+**Pacotes R (obrigatórios):** `bookdown`, `knitr`, `rmarkdown` (Declared in DESCRIPTION).
+
+**Origem do template:** O ufprdown segue a mesma abordagem do [thesisdown](https://github.com/ismayc/thesisdown) (Chester Ismay): um template R Markdown baseado em bookdown que gera um documento acadêmico a partir de uma classe LaTeX institucional. A estrutura e várias convenções foram inspiradas também no [ufscdown](https://github.com/lfpdroubi/ufscdown) (Luiz Droubi), adaptadas para a UFPR.
+
+**Outros créditos:**
+
+- Classe **ppginf.cls**: Prof. Carlos A. Maziero (DInf/UFPR) — template oficial PPGInf/UFPR.
+- [bookdown](https://bookdown.org/) (Yihui Xie).
+
+O ufprdown não é um fork de thesisdown ou ufscdown; é um pacote independente que reutiliza a ideia (bookdown + LaTeX institucional) e adapta o fluxo para a classe ppginf.cls da UFPR.
+
+---
+
+## Instalação
+
+Requisitos: R ≥ 3.5.0, [Pandoc](https://pandoc.org) ≥ 2.0, e LaTeX (TeX Live ou [TinyTeX](https://yihui.org/tinytex/): `tinytex::install_tinytex()`).
 
 ```r
-# Instalar dependências
-install.packages(c("bookdown", "knitr", "rmarkdown", "devtools"))
-
-# Instalar o ufprdown localmente
-devtools::install("/caminho/para/ufprdown")
-
-# Ou, se publicado no GitHub:
-# remotes::install_github("evandeilton/ufprdown")
+install.packages(c("bookdown", "knitr", "rmarkdown"))
+# Local
+devtools::install_local("/caminho/para/ufprdown")
+# GitHub
+remotes::install_github("evandeilton/ufprdown")
 ```
 
-## 🚀 Como usar
+---
 
-### Via RStudio
+## Como usar
 
-1. Instale o pacote conforme acima
-2. **File → New Project → New Directory**
-3. Selecione **"Tese UFPR"** na lista de templates
-4. Escolha o diretório e clique em **Create Project**
-5. Clique em **Build Book** ou use `Ctrl+Shift+B`
+**RStudio:** File → New Project → New Directory → template **"Tese UFPR"**. Depois, Build Book (ou Ctrl+Shift+B).
 
-### Via console R
+**Console:** após criar o projeto (por exemplo com `rmarkdown::draft("minha-tese", template = "thesis", package = "ufprdown", create_dir = TRUE)`), no diretório do projeto:
 
 ```r
+library(bookdown)
 library(ufprdown)
-
-# Compilar o PDF da tese
 bookdown::render_book("index.Rmd", "ufprdown::thesis_pdf")
-
-# Compilar versão web (gitbook)
-bookdown::render_book("index.Rmd", "ufprdown::thesis_gitbook")
 ```
 
-## 📁 Estrutura do projeto
+Para HTML (gitbook), Word ou epub, use `ufprdown::thesis_gitbook`, `ufprdown::thesis_word` ou `ufprdown::thesis_epub` como segundo argumento de `render_book()`.
 
-Ao criar um novo projeto com o template, a seguinte estrutura é gerada:
+---
+
+## Estrutura do projeto
+
+Ao criar um projeto com o template:
 
 ```
-minha-tese/
-├── index.Rmd              ← Arquivo principal (YAML + Introdução)
-├── 00-abstract.Rmd        ← Resumo (PT)
-├── 00-foreignabstract.Rmd ← Abstract (EN)
-├── 00--prelim.Rmd         ← Elementos pré-textuais (HTML)
-├── 01-chap1.Rmd           ← Cap. 1: Fundamentação Teórica
-├── 02-chap2.Rmd           ← Cap. 2: Revisão de Literatura
-├── 03-chap3.Rmd           ← Cap. 3: Metodologia
-├── 04-chap4.Rmd           ← Cap. 4: Resultados
-├── 96-conclusion.Rmd      ← Conclusão
-├── 97-references.Rmd      ← Referências
-├── 98-appendix.Rmd        ← Apêndices
-├── _bookdown.yml          ← Configuração do bookdown
-├── template.tex           ← Template LaTeX (Pandoc → ppginf)
-├── ppginf.cls             ← Classe UFPR
-├── apalike-ptbr.bst       ← Estilo bibliográfico (PT-BR)
-├── lista_siglas.tex       ← Lista de acrônimos
-├── lista_simbolos.tex     ← Lista de símbolos
-├── Ficha_Catalografica.pdf
-├── aprovacao.pdf
-├── bib/                   ← Arquivos de bibliografia
-│   ├── references.bib
-│   ├── thesis.bib
-│   └── pkgs.bib
-├── setup/                 ← Configuração LaTeX
-│   ├── packages.tex
-│   └── fundo-capa.png
-├── figure/                ← Figuras estáticas
-├── images/                ← Figuras geradas pelo R
-├── csl/apa.csl            ← Estilo de citação
-└── data/                  ← Dados de exemplo
+index.Rmd                 # Principal (YAML + introdução)
+00-abstract.Rmd          # Resumo (PT)
+00-foreignabstract.Rmd   # Abstract (EN)
+00--prelim.Rmd           # Pré-textuais (HTML)
+01-chap1.Rmd ... 04-chap4.Rmd
+96-conclusion.Rmd
+97-references.Rmd
+98-appendix.Rmd
+99-anexo.Rmd
+_bookdown.yml             # Ordem dos arquivos e rótulos em PT
+template.tex              # Template LaTeX (Pandoc → ppginf)
+ppginf.cls                # Classe UFPR (não modificar)
+setup/packages.tex        # Pacotes LaTeX adicionais
+setup/fundo-capa.png      # Imagem da capa
+bib/thesis.bib, references.bib, pkgs.bib
+csl/apa.csl
+lista_siglas.tex, lista_simbolos.tex
+apalike-ptbr.bst
+Ficha_Catalografica.pdf, aprovacao.pdf
 ```
 
-## ⚙️ Campos YAML disponíveis
+---
 
-No cabeçalho do `index.Rmd`, os seguintes campos controlam a tese:
+## Campos YAML principais
 
-| Campo | Descrição | Exemplo |
-|---|---|---|
-| `author` | Nome do autor | José Evandeilton Lopes |
-| `advisor` | Orientador | Prof. Wagner Hugo Bonat, PhD |
-| `coadvisor` | Coorientador (opcional) | — |
-| `institution` | Instituição por extenso | Universidade Federal do Paraná |
-| `inst_short` | Sigla da instituição | UFPR |
-| `field` | Área de concentração | Métodos Numéricos em Engenharia |
-| `local` | Local | Curitiba PR |
-| `date_year` | Ano | 2026 |
-| `doc_type` | Tipo | Tese / Dissertação / Qualificação |
-| `level` | Nível | doutorado / mestrado |
-| `descr` | Descrição na folha de rosto | Tese apresentada como... |
-| `doc_mode` | Versão | defesa / final |
-| `coverimage` | Imagem da capa | setup/fundo-capa.png |
-| `title` | Título do trabalho | Modelos de Regressão Beta... |
-| `palavras-chave` | Palavras-chave (PT) | Regressão beta. Efeitos mistos... |
-| `keywords` | Keywords (EN) | Beta regression. Mixed effects... |
+No cabeçalho do `index.Rmd`:
 
-## 🔧 Requisitos do sistema
+| Campo | Descrição |
+|-------|-----------|
+| `author`, `advisor`, `coadvisor` | Autoria |
+| `institution`, `inst_short`, `field`, `local`, `date_year` | Instituição e ano |
+| `doc_type`, `level`, `degree`, `course` | Tipo (Tese/Dissertação/Trabalho de Conclusão de Curso) e programa |
+| `doc_mode`, `final_mode` | Versão defesa vs. final |
+| `title`, `abstract`, `foreignabstract` | Título e resumos |
+| `palavras-chave`, `keywords` | Palavras-chave PT/EN |
+| `font-family` | Tipo de fonte para a redação do trabalho (`'Times New Roman'` ou `'Arial'`) |
+| `coverimage`, `descr` | Capa e descrição na folha de rosto |
+| `element_names_up` | Define o rótulo de elementos textuais principais (Figura, Tabela, Apêndice, Anexo, Listas e Sumário) em caixa alta (`true` ou `false`). Padrão: `true` |
+| `fig_caption_position` | Define a posição do título das imagens, quadros e tabelas (`top` ou `bottom`) |
+| `thanks`, `dedication` | Agradecimentos e dedicatória (só em modo final) |
+| `bibliography`, `csl` | Arquivos .bib e estilo de citação |
 
-- **R** ≥ 3.5.0
-- **RStudio** (recomendado)
-- **pandoc** ≥ 2.0
-- **LaTeX**: TeX Live ou TinyTeX (`tinytex::install_tinytex()`)
-- Pacotes R: `bookdown`, `knitr`, `rmarkdown`
+Lista completa e exemplos estão na vignette: `vignette("ufprdown", package = "ufprdown")`.
 
-## 📝 Versão de defesa vs. final
+---
 
-- **`doc_mode: 'defesa'`**: espaçamento 1,5; sem ficha catalográfica, aprovação,
-  dedicatória nem agradecimentos; indicação de data de compilação.
-- **`doc_mode: 'final'`**: espaçamento simples; todos os elementos pré-textuais
-  incluídos; pronto para depósito na biblioteca.
+## Versão defesa vs. final
 
-**Atenção (modo final):** Nos campos `thanks` e `dedication` do YAML, **não use
-`| ` no início de cada linha**. Esse formato é interpretado pelo Pandoc como
-lista e gera `\item` no LaTeX, causando o erro "Lonely \\item". Use apenas
-quebra de linha, por exemplo:
+- **defesa** (`doc_mode: 'defesa'`, `final_mode: false`): espaçamento 1,5; sem ficha catalográfica, folha de aprovação, dedicatória ou agradecimentos.
+- **final** (`doc_mode: 'final'`, `final_mode: true`): espaçamento simples; inclui todos os elementos pré-textuais.
+
+Nos campos `thanks` e `dedication`, não use `| ` no início de cada linha (o Pandoc gera lista e ocorre erro "Lonely \item" no LaTeX). Use apenas quebra de linha após o `|`:
 
 ```yaml
 thanks: |
@@ -148,14 +129,8 @@ thanks: |
   Ao meu orientador...
 ```
 
-## 🙏 Créditos
+---
 
-- Classe `ppginf.cls`: Prof. Carlos A. Maziero, DInf/UFPR — template oficial do
-  PPGInf/UFPR; **não modificar** (contém os padrões da UFPR).
-- Baseado no [thesisdown](https://github.com/ismayc/thesisdown) e
-  [ufscdown](https://github.com/lfpdroubi/ufscdown)
-- [bookdown](https://bookdown.org/) por Yihui Xie
-
-## 📄 Licença
+## Licença
 
 MIT © 2026 José Evandeilton Lopes

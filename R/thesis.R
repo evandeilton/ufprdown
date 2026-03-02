@@ -30,24 +30,24 @@
 #' bookdown::render_book("index.Rmd", "ufprdown::thesis_pdf")
 #' }
 thesis_pdf <- function(toc = TRUE, toc_depth = 3, highlight = "default", ...) {
-    base <- bookdown::pdf_book(
-        template = "template.tex",
-        toc = toc,
-        toc_depth = toc_depth,
-        highlight = highlight,
-        keep_tex = TRUE,
-        pandoc_args = "--top-level-division=chapter",
-        ...
-    )
+  base <- bookdown::pdf_book(
+    template = "template.tex",
+    toc = toc,
+    toc_depth = toc_depth,
+    highlight = highlight,
+    keep_tex = TRUE,
+    pandoc_args = "--top-level-division=chapter",
+    ...
+  )
 
-    # Opções padrão para chunks knitr
-    base$knitr$opts_chunk$comment <- NA
+  # Opções padrão para chunks knitr
+  base$knitr$opts_chunk$comment <- NA
 
-    old_opt <- getOption("bookdown.post.latex")
-    options(bookdown.post.latex = fix_envs)
-    on.exit(options(bookdown.post.latex = old_opt))
+  old_opt <- getOption("bookdown.post.latex")
+  options(bookdown.post.latex = fix_envs)
+  on.exit(options(bookdown.post.latex = old_opt))
 
-    base
+  base
 }
 
 #' Gera a tese como página web (gitbook)
@@ -68,20 +68,20 @@ thesis_pdf <- function(toc = TRUE, toc_depth = 3, highlight = "default", ...) {
 #' #   ufprdown::thesis_gitbook: default
 #' }
 thesis_gitbook <- function(...) {
-    base <- bookdown::gitbook(
-        split_by = "chapter+number",
-        config = list(toc = list(
-            collapse = "section",
-            before = '<li><a href="./">Tese UFPR</a></li>',
-            after = '<li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado com bookdown</a></li>',
-            ...
-        ))
-    )
+  base <- bookdown::gitbook(
+    split_by = "chapter+number",
+    config = list(toc = list(
+      collapse = "section",
+      before = '<li><a href="./">Tese UFPR</a></li>',
+      after = '<li><a href="https://github.com/rstudio/bookdown" target="blank">Publicado com bookdown</a></li>',
+      ...
+    ))
+  )
 
-    base$knitr$opts_chunk$comment <- NA
-    base$knitr$opts_chunk$fig.align <- "center"
+  base$knitr$opts_chunk$comment <- NA
+  base$knitr$opts_chunk$fig.align <- "center"
 
-    base
+  base
 }
 
 #' Gera a tese em formato Word
@@ -102,12 +102,12 @@ thesis_gitbook <- function(...) {
 #' #   ufprdown::thesis_word: default
 #' }
 thesis_word <- function(...) {
-    base <- bookdown::word_document2(...)
+  base <- bookdown::word_document2(...)
 
-    base$knitr$opts_chunk$comment <- NA
-    base$knitr$opts_chunk$fig.align <- "center"
+  base$knitr$opts_chunk$comment <- NA
+  base$knitr$opts_chunk$fig.align <- "center"
 
-    base
+  base
 }
 
 #' Gera a tese em formato epub (ebook)
@@ -128,12 +128,12 @@ thesis_word <- function(...) {
 #' #   ufprdown::thesis_epub: default
 #' }
 thesis_epub <- function(...) {
-    base <- bookdown::epub_book(...)
+  base <- bookdown::epub_book(...)
 
-    base$knitr$opts_chunk$comment <- NA
-    base$knitr$opts_chunk$fig.align <- "center"
+  base$knitr$opts_chunk$comment <- NA
+  base$knitr$opts_chunk$fig.align <- "center"
 
-    base
+  base
 }
 
 #' Corrige ambientes LaTeX
@@ -145,14 +145,14 @@ thesis_epub <- function(...) {
 #' @return Vetor de caracteres modificado.
 #' @keywords internal
 fix_envs <- function(x) {
-    beg_reg <- "^\\s*\\\\begin\\{.*\\}"
-    end_reg <- "^\\s*\\\\end\\{.*\\}"
-    i3 <- if (length(i1 <- grep(beg_reg, x))) (i1 - 1)[grepl("^\\s*$", x[i1 - 1])]
+  beg_reg <- "^\\s*\\\\begin\\{.*\\}"
+  end_reg <- "^\\s*\\\\end\\{.*\\}"
+  i3 <- if (length(i1 <- grep(beg_reg, x))) (i1 - 1)[grepl("^\\s*$", x[i1 - 1])]
 
-    i3 <- c(
-        i3,
-        if (length(i2 <- grep(end_reg, x))) (i2 + 1)[grepl("^\\s*$", x[i2 + 1])]
-    )
-    if (length(i3)) x <- x[-i3]
-    x
+  i3 <- c(
+    i3,
+    if (length(i2 <- grep(end_reg, x))) (i2 + 1)[grepl("^\\s*$", x[i2 + 1])]
+  )
+  if (length(i3)) x <- x[-i3]
+  x
 }

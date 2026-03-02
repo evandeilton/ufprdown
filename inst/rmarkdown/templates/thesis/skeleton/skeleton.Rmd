@@ -38,7 +38,10 @@ doc_mode: 'defesa'
 # catalográfica, folha de aprovação, dedicatória e agradecimentos
 final_mode: false
 
-# ─── CAPA ───────────────────────────────────────────────────────────────────
+# ─── FONTE E CAPA ────────────────────────────────────────────────────────────
+# Pode escolher Arial ou Times New Roman 
+font-family: 'Times New Roman'
+# Caminho da imagem de capa
 coverimage: 'setup/fundo-capa.png'
 
 # ─── TÍTULO ─────────────────────────────────────────────────────────────────
@@ -61,6 +64,12 @@ abstract: |
 foreignabstract: |
   `r if(knitr:::is_latex_output()) paste(readLines("00-foreignabstract.Rmd"),
   collapse = '\n  ')`
+
+# ─── DESIGN DAS LEGENDAS ───────────────────────────────────────────────────
+# Devem os prefixos de figuras/tabelas ficar em maiúsculo (ex. FIGURA vs Figura)?
+element_names_up: true
+# Posição do título das imagens, gráficos e tabelas ('top' ou 'bottom')
+fig_caption_position: 'top'
 
 # ─── DEDICATÓRIA / AGRADECIMENTOS ──────────────────────────────────────────
 # Não use "| " no início de cada linha em thanks/dedication (gera \item no LaTeX e erro em modo final).

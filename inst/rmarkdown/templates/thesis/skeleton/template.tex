@@ -16,6 +16,17 @@ $endif$
 % ─── PACOTES ────────────────────────────────────────────────────────────────
 \input{setup/packages}
 
+% ─── FONTES (Times New Roman ou Arial) ──────────────────────────────────────
+$if(font-family)$
+\ifthenelse{\equal{$font-family$}{Arial}}{
+  \usepackage{helvet}
+  \renewcommand{\familydefault}{\sfdefault}
+}{
+  \usepackage{mathptmx}
+}
+$else$
+\usepackage{mathptmx}
+$endif$
 
 $if(highlighting-macros)$
 $highlighting-macros$
@@ -60,6 +71,67 @@ $endif$
 $for(header-includes)$
 $header-includes$
 $endfor$
+
+\makeatletter
+$if(element_names_up)$
+  \def\@listacronyms{LISTA DE SIGLAS}
+  \def\@listsymbols{LISTA DE S\'IMBOLOS}
+  \def\@chapthanks{AGRADECIMENTOS}
+  \def\@tagappendix{AP\^ENDICE}
+  \def\@taganexo{ANEXO}
+$else$
+  \def\@listacronyms{Lista de Siglas}
+  \def\@listsymbols{Lista de S\'imbolos}
+  \def\@chapthanks{Agradecimentos}
+  \def\@tagappendix{Ap\^endice}
+  \def\@taganexo{Anexo}
+$endif$
+\makeatother
+
+\AtBeginDocument{
+$if(element_names_up)$
+  \renewcommand{\figurename}{FIGURA}
+  \renewcommand{\tablename}{TABELA}
+  \renewcommand{\listfigurename}{LISTA DE FIGURAS}
+  \renewcommand{\listtablename}{LISTA DE TABELAS}
+  \renewcommand{\proofname}{DEMONSTRAÇÃO}
+  \renewcommand{\appendixname}{APÊNDICE}
+  \renewcommand{\contentsname}{SUMÁRIO}
+  \renewcommand{\bibname}{REFERÊNCIAS}
+  \floatname{quadro}{QUADRO}
+  \renewcommand{\listofquadros}{\listof{quadro}{LISTA DE QUADROS}}
+$else$
+  \renewcommand{\figurename}{Figura}
+  \renewcommand{\tablename}{Tabela}
+  \renewcommand{\listfigurename}{Lista de Figuras}
+  \renewcommand{\listtablename}{Lista de Tabelas}
+  \renewcommand{\proofname}{Demonstração}
+  \renewcommand{\appendixname}{Apêndice}
+  \renewcommand{\contentsname}{Sumário}
+  \renewcommand{\bibname}{Referências}
+  \floatname{quadro}{Quadro}
+  \renewcommand{\listofquadros}{\listof{quadro}{Lista de Quadros}}
+$endif$
+}
+
+\AtBeginDocument{
+$if(element_names_up)$
+\DeclareCaptionLabelFormat{upper}{\MakeUppercase{#1} #2}
+\captionsetup{labelformat=upper}
+$endif$
+}
+
+
+$if(fig_caption_position)$
+$if(fig_caption_position_bottom)$
+\floatstyle{plain}
+$else$
+\floatstyle{plaintop}
+$endif$
+\restylefloat{figure}
+\restylefloat{table}
+\restylefloat{quadro}
+$endif$
 
 % ─── INÍCIO DO DOCUMENTO ────────────────────────────────────────────────────
 \begin{document}

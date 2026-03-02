@@ -55,7 +55,7 @@ Os seguintes campos estão disponíveis no cabeçalho YAML:
   \item{field}{Área de concentração}
   \item{local}{Cidade e estado (ex: Curitiba PR)}
   \item{date_year}{Ano da defesa}
-  \item{doc_type}{Tipo de documento: Tese, Dissertação ou Qualificação}
+  \item{doc_type}{Tipo de documento: Tese, Dissertação, Trabalho de Conclusão de Curso ou Qualificação}
   \item{level}{Nível: doutorado ou mestrado}
   \item{descr}{Descrição para folha de rosto}
   \item{doc_mode}{Versão: defesa ou final}

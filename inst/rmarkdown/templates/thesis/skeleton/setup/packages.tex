@@ -7,12 +7,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
-% Fonte principal: lmodern (Computer Modern melhorado, compatível com microtype)
-% O template original usa newtxtext/newtxmath, mas há conflito com microtype.
-\usepackage{lmodern}
-
-% Fontes para ambientes específicos
-\usepackage[scaled=0.9]{helvet}         % Sans Serif
+\usepackage{ifthen}
 \usepackage{courier}                    % Verbatim, Listings, etc
 
 % ── Matemática ───────────────────────────────────────────────────────────────
@@ -116,18 +111,7 @@
 \newcommand{\bcenter}{\begin{center}}
 \newcommand{\ecenter}{\end{center}}
 
-% ── Correção de Idiomas e Anexo ───────────────────────────────────────────────
-% Evita que bookdown/pandoc sobrescrevam as traduções para o inglês.
-\AtBeginDocument{
-  \renewcommand{\figurename}{Figura}
-  \renewcommand{\tablename}{Tabela}
-  \renewcommand{\listfigurename}{Lista de Figuras}
-  \renewcommand{\listtablename}{Lista de Tabelas}
-  \renewcommand{\proofname}{Demonstração}
-  \renewcommand{\appendixname}{Apêndice}
-}
-
-% Definição de \anexo (similar ao \appendix da ppginf.cls)
+% ── Anexo ───────────────────────────────────────────────% Definição de \anexo (similar ao \appendix da ppginf.cls)
 \makeatletter
 \newcommand{\@taganexo}{ANEXO}
 \newcommand{\anexo@chapter}[1]{%
