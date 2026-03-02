@@ -71,8 +71,19 @@ test_that("o template thesis compila em PDF nas fontes padrao e alternativas", {
 
         # Compilação
         owd <- setwd(test_dir)
-        bookdown::render_book("index.Rmd", "ufprdown::thesis_pdf", quiet = TRUE)
-        setwd(owd)
+        tryCatch({
+            bookdown::render_book("index.Rmd", "ufprdown::thesis_pdf", quiet = TRUE)
+        }, error = function(e) {
+            log_name <- paste0(tools::file_path_sans_ext(out_name), ".log")
+            if (file.exists(log_name)) {
+                message("\n====== LATEX LOG ERROR ======\n")
+                message(paste(readLines(log_name), collapse = "\n"))
+                message("=============================\n")
+            }
+            stop(e)
+        }, finally = {
+            setwd(owd)
+        })
 
         pdf_path <- file.path(test_dir, "_book", out_name)
         expect_true(file.exists(pdf_path))
