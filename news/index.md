@@ -1,5 +1,30 @@
 # Changelog
 
+## ufprdown 0.1.4
+
+- **Correção crítica:** removido `\bibliography{}` de
+  `97-references.Rmd` que conflitava com o pandoc citeproc e causava
+  duplicação ou ausência das referências no PDF. Adicionado heading
+  `# Referências {-}` e âncora `<div id="refs">` para posicionamento
+  correto antes dos apêndices.
+- **Correção de títulos estruturais:** SUMÁRIO, LISTA DE FIGURAS, LISTA
+  DE TABELAS, LISTA DE QUADROS, LISTA DE SIGLAS, LISTA DE SÍMBOLOS,
+  REFERÊNCIAS e APÊNDICE agora são **sempre** em caixa alta por norma
+  ABNT/UFPR, independente do valor de `element_names_up`. O parâmetro
+  `element_names_up` passa a controlar exclusivamente os prefixos de
+  legenda (FIGURA vs Figura, TABELA vs Tabela, QUADRO vs Quadro).
+- **Correção de conflito `\@taganexo`:** removida definição duplicada de
+  `\@taganexo` em `setup/packages.tex` que causava erro de compilação
+  quando `element_names_up: true`.
+- **Correção de `\CSLRightInline`:** substituído
+  `\linewidth - \csllabelwidth` por
+  `\dimexpr\linewidth-\csllabelwidth\relax` evitando erro de dimensão em
+  algumas versões do LaTeX.
+- **Remoção de arquivo duplicado:** `setup/ppginf.cls` (cópia nunca
+  utilizada pelo LaTeX) foi removido.
+- **Reorganização de `\RequirePackage{comment}`:** movido para
+  `setup/packages.tex` na posição correta após `\documentclass`.
+
 ## ufprdown 0.1.3
 
 - Correção drástica de um problema originário do pacote `rmarkdown` onde

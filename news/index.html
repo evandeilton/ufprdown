@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ufprdown</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,21 @@
 
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.1.4" id="ufprdown-014">ufprdown 0.1.4<a class="anchor" aria-label="anchor" href="#ufprdown-014"></a></h2>
+<ul><li>
+<strong>Correção crítica:</strong> removido <code>\bibliography{}</code> de <code>97-references.Rmd</code> que conflitava com o pandoc citeproc e causava duplicação ou ausência das referências no PDF. Adicionado heading <code># Referências {-}</code> e âncora <code>&lt;div id="refs"&gt;</code> para posicionamento correto antes dos apêndices.</li>
+<li>
+<strong>Correção de títulos estruturais:</strong> SUMÁRIO, LISTA DE FIGURAS, LISTA DE TABELAS, LISTA DE QUADROS, LISTA DE SIGLAS, LISTA DE SÍMBOLOS, REFERÊNCIAS e APÊNDICE agora são <strong>sempre</strong> em caixa alta por norma ABNT/UFPR, independente do valor de <code>element_names_up</code>. O parâmetro <code>element_names_up</code> passa a controlar exclusivamente os prefixos de legenda (FIGURA vs Figura, TABELA vs Tabela, QUADRO vs Quadro).</li>
+<li>
+<strong>Correção de conflito <code>\@taganexo</code>:</strong> removida definição duplicada de <code>\@taganexo</code> em <code>setup/packages.tex</code> que causava erro de compilação quando <code>element_names_up: true</code>.</li>
+<li>
+<strong>Correção de <code>\CSLRightInline</code>:</strong> substituído <code>\linewidth - \csllabelwidth</code> por <code>\dimexpr\linewidth-\csllabelwidth\relax</code> evitando erro de dimensão em algumas versões do LaTeX.</li>
+<li>
+<strong>Remoção de arquivo duplicado:</strong> <code>setup/ppginf.cls</code> (cópia nunca utilizada pelo LaTeX) foi removido.</li>
+<li>
+<strong>Reorganização de <code>\RequirePackage{comment}</code>:</strong> movido para <code>setup/packages.tex</code> na posição correta após <code>\documentclass</code>.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.3" id="ufprdown-013">ufprdown 0.1.3<a class="anchor" aria-label="anchor" href="#ufprdown-013"></a></h2>
 <ul><li>Correção drástica de um problema originário do pacote <code>rmarkdown</code> onde a função <code>draft(...)</code> renomeava automaticamente o <code>skeleton.Rmd</code> primário, quebrando o comportamento obrigatório de inicialização indexada do <code>bookdown</code>. Um proxy inteligente chamado <code>skeleton.Rmd</code> (Descartável) foi criado ao passo que o código real agora se encontra em um <code>index.Rmd</code> seguro na pasta template.</li>
