@@ -76,9 +76,13 @@ test_that("o template thesis compila em PDF nas fontes padrao e alternativas", {
         }, error = function(e) {
             log_name <- paste0(tools::file_path_sans_ext(out_name), ".log")
             if (file.exists(log_name)) {
-                message("\n====== LATEX LOG ERROR ======\n")
-                message(paste(readLines(log_name), collapse = "\n"))
-                message("=============================\n")
+                log_content <- paste(readLines(log_name), collapse = "\n")
+                if (nchar(log_content) > 3000) {
+                  log_content <- paste("...[truncado]...\n", substr(log_content, nchar(log_content) - 3000, nchar(log_content)))
+                }
+                e$message <- paste0(e$message, "\n\n====== LATEX LOG ERROR ======\n", log_content, "\n=============================\n")
+            } else {
+                e$message <- paste0(e$message, "\n\n====== NO LOG FILE FOUND IN ", getwd(), " ======\nLogs disponiveis: ", paste(list.files(pattern = "\\.log$"), collapse=", "))
             }
             stop(e)
         }, finally = {
