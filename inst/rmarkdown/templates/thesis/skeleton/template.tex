@@ -4,9 +4,9 @@
 % modificado, pois contém os padrões de formatação da UFPR.
 % =============================================================================
 
-% ─── CONFIGURAÇÃO DA CLASSE ─────────────────────────────────────────────────
-% Pacote exigido pela ppginf.cls (oficial PPGInf) em modo defesa
-\RequirePackage{comment}
+% ─── CONFIGURAÇÃO DA CLASSE ───────────────────────────────────────────
+% O pacote 'comment' é carregado em setup/packages.tex (necessário para os
+% ambientes comment/endcomment da ppginf.cls no modo defesa).
 $if(final_mode)$
 \documentclass[final,oneside,english,brazilian]{ppginf}
 $else$
@@ -68,7 +68,7 @@ $endif$
 \usepackage{calc}
 \newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
 \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\dimexpr\linewidth-\csllabelwidth\relax}{\strut#1\strut}}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 $for(header-includes)$
@@ -76,44 +76,33 @@ $header-includes$
 $endfor$
 
 \makeatletter
-$if(element_names_up)$
+% Títulos estruturais: SEMPRE em maiúsculo por norma ABNT/UFPR,
+% independente de element_names_up (que controla apenas prefixos de legenda).
   \def\@listacronyms{LISTA DE SIGLAS}
   \def\@listsymbols{LISTA DE S\'IMBOLOS}
   \def\@chapthanks{AGRADECIMENTOS}
   \def\@tagappendix{AP\^ENDICE}
   \def\@taganexo{ANEXO}
-$else$
-  \def\@listacronyms{Lista de Siglas}
-  \def\@listsymbols{Lista de S\'imbolos}
-  \def\@chapthanks{Agradecimentos}
-  \def\@tagappendix{Ap\^endice}
-  \def\@taganexo{Anexo}
-$endif$
 \makeatother
 
 \AtBeginDocument{
+% Títulos estruturais: SEMPRE em maiúsculo (norma ABNT/UFPR)
+  \renewcommand{\listfigurename}{LISTA DE FIGURAS}
+  \renewcommand{\listtablename}{LISTA DE TABELAS}
+  \renewcommand{\proofname}{DEMONSTRA\c{C}\~AO}
+  \renewcommand{\appendixname}{AP\^ENDICE}
+  \renewcommand{\contentsname}{SUM\'ARIO}
+  \renewcommand{\bibname}{REFER\^ENCIAS}
+  \renewcommand{\listofquadros}{\listof{quadro}{LISTA DE QUADROS}}
+% Prefixos de legenda: controlados por element_names_up
 $if(element_names_up)$
   \renewcommand{\figurename}{FIGURA}
   \renewcommand{\tablename}{TABELA}
-  \renewcommand{\listfigurename}{LISTA DE FIGURAS}
-  \renewcommand{\listtablename}{LISTA DE TABELAS}
-  \renewcommand{\proofname}{DEMONSTRAÇÃO}
-  \renewcommand{\appendixname}{APÊNDICE}
-  \renewcommand{\contentsname}{SUMÁRIO}
-  \renewcommand{\bibname}{REFERÊNCIAS}
   \floatname{quadro}{QUADRO}
-  \renewcommand{\listofquadros}{\listof{quadro}{LISTA DE QUADROS}}
 $else$
   \renewcommand{\figurename}{Figura}
   \renewcommand{\tablename}{Tabela}
-  \renewcommand{\listfigurename}{Lista de Figuras}
-  \renewcommand{\listtablename}{Lista de Tabelas}
-  \renewcommand{\proofname}{Demonstração}
-  \renewcommand{\appendixname}{Apêndice}
-  \renewcommand{\contentsname}{Sumário}
-  \renewcommand{\bibname}{Referências}
   \floatname{quadro}{Quadro}
-  \renewcommand{\listofquadros}{\listof{quadro}{Lista de Quadros}}
 $endif$
 }
 

@@ -1,6 +1,9 @@
 <!--
 Este arquivo gera a seção de referências bibliográficas.
-Deve ser o último capítulo antes dos apêndices.
+As referências são processadas pelo pandoc citeproc (definido no YAML via
+'bibliography' e 'csl') e inseridas automaticamente no final do documento
+pelo bloco $for(include-after)$ do template.tex.
+NÃO use \bibliography{} aqui — isso conflita com o citeproc e duplica as referências.
 -->
 
 ```{r bib-packages, include=FALSE}
@@ -8,4 +11,7 @@ Deve ser o último capítulo antes dos apêndices.
 knitr::write_bib(c("bookdown", "knitr", "rmarkdown"), "bib/pkgs.bib", width = 78)
 ```
 
-\bibliography{bib/thesis.bib,bib/references.bib,bib/pkgs.bib}
+# Referências {-}
+
+<div id="refs"></div>
+

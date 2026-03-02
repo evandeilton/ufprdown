@@ -3,6 +3,10 @@
 % Baseado no packages.tex original do template PPGInf/UFPR
 % =============================================================================
 
+% Necessário para os ambientes comment/endcomment usados pela ppginf.cls
+% no modo defesa (ficha, aprovacao, agradece, dedica são suprimidos)
+\RequirePackage{comment}
+
 % ── Codificação e fontes ─────────────────────────────────────────────────────
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -95,9 +99,11 @@
 \usepackage{rotating}                   % rotação de tabelas/figuras
 
 % ── Quadros (UFPR) ──────────────────────────────────────────────────────────
+% \newfloat e \newcommand{\listofquadros} são definidos aqui como ponto de
+% partida; o nome (floatname) e o título de \listofquadros são sobrescritos
+% pelo template.tex via \AtBeginDocument, respeitando element_names_up.
 \usepackage{float}
 \newfloat{quadro}{htbp}{loq}[chapter]
-\floatname{quadro}{Quadro}
 \newcommand{\listofquadros}{\listof{quadro}{Lista de Quadros}}
 
 % ── Comandos personalizados ──────────────────────────────────────────────────
@@ -111,9 +117,11 @@
 \newcommand{\bcenter}{\begin{center}}
 \newcommand{\ecenter}{\end{center}}
 
-% ── Anexo ───────────────────────────────────────────────% Definição de \anexo (similar ao \appendix da ppginf.cls)
+% ── Anexo ───────────────────────────────────────────────────────────────────
+% Definição de \anexo (similar ao \appendix da ppginf.cls).
+% NOTA: \@taganexo é definido em template.tex respeitando o YAML element_names_up;
+%       portanto NÃO é redefinido aqui para evitar conflito de "already defined".
 \makeatletter
-\newcommand{\@taganexo}{ANEXO}
 \newcommand{\anexo@chapter}[1]{%
   \refstepcounter{chapter}%
   \orig@chapter*{\@taganexo\ \@Alph\c@chapter\enskip -- \enskip\MakeUppercase{#1}}%
