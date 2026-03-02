@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ufprdown</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,8 +46,7 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9">
-<div class="section level1">
+  <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="ufprdown">ufprdown<a class="anchor" aria-label="anchor" href="#ufprdown"></a>
 </h1></div>
 <p>Pacote R para escrever teses, dissertações e Trabalhos de Conclusão de Curso na UFPR usando R Markdown e bookdown.</p>
@@ -86,9 +85,11 @@
 <hr>
 </div>
 <div class="section level2">
-<h2 id="instalação">Instalação<a class="anchor" aria-label="anchor" href="#instala%C3%A7%C3%A3o"></a>
+<h2 id="instalação-e-requisitos">Instalação e Requisitos<a class="anchor" aria-label="anchor" href="#instala%C3%A7%C3%A3o-e-requisitos"></a>
 </h2>
-<p>Requisitos: R ≥ 3.5.0, <a href="https://pandoc.org" class="external-link">Pandoc</a> ≥ 2.0, e LaTeX (TeX Live ou <a href="https://yihui.org/tinytex/" class="external-link">TinyTeX</a>: <code><a href="https://rdrr.io/pkg/tinytex/man/install_tinytex.html" class="external-link">tinytex::install_tinytex()</a></code>).</p>
+<p><strong>Atenção:</strong> Devido à complexidade e à quantidade de pacotes LaTeX (estilos, fontes como Arial e Times, algoritmos, etc.) exigidos pelo template da UFPR, <strong>é estritamente necessário ter uma distribuição completa (FULL) do LaTeX instalada</strong> em seu computador para gerar os PDFs. Pacotes minimalistas como o <em>TinyTeX</em> nativo costumam não ser suficientes e podem gerar o erro de “Fatal error occurred, no output PDF file produced”.</p>
+<p>Por favor, instale a versão completa para o seu sistema: - <strong>Windows:</strong> <a href="https://tug.org/texlive/windows.html" class="external-link">TeX Live Windows</a> ou <a href="https://miktex.org/download" class="external-link">MiKTeX (instalação completa)</a> - <strong>Linux (Ubuntu/Debian):</strong> Abra o terminal e rode <code>sudo apt-get install texlive-full</code> - <strong>macOS:</strong> <a href="https://tug.org/mactex/" class="external-link">MacTeX</a></p>
+<p>Demais pré-requisitos: - R ≥ 3.5.0 - <a href="https://pandoc.org" class="external-link">Pandoc</a> ≥ 2.0</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bookdown"</span>, <span class="st">"knitr"</span>, <span class="st">"rmarkdown"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># Local</span></span>
@@ -242,7 +243,6 @@ Nos campos <code>thanks</code> e <code>dedication</code>, não use <code>|</code
 <p>MIT © 2026 José Evandeilton Lopes</p>
 </div>
 </div>
-
   </main><aside class="col-md-3"><div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
@@ -267,12 +267,7 @@ Nos campos <code>thanks</code> e <code>dedication</code>, não use <code>|</code
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://github.com/evandeilton/ufprdown/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/evandeilton/ufprdown/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-</ul>
-</div>
+
 
   </aside>
 </div>

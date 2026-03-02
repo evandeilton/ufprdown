@@ -56,11 +56,24 @@ adapta o fluxo para a classe ppginf.cls da UFPR.
 
 ------------------------------------------------------------------------
 
-## Instalação
+## Instalação e Requisitos
 
-Requisitos: R ≥ 3.5.0, [Pandoc](https://pandoc.org) ≥ 2.0, e LaTeX (TeX
-Live ou [TinyTeX](https://yihui.org/tinytex/):
-[`tinytex::install_tinytex()`](https://rdrr.io/pkg/tinytex/man/install_tinytex.html)).
+**Atenção:** Devido à complexidade e à quantidade de pacotes LaTeX
+(estilos, fontes como Arial e Times, algoritmos, etc.) exigidos pelo
+template da UFPR, **é estritamente necessário ter uma distribuição
+completa (FULL) do LaTeX instalada** em seu computador para gerar os
+PDFs. Pacotes minimalistas como o *TinyTeX* nativo costumam não ser
+suficientes e podem gerar o erro de “Fatal error occurred, no output PDF
+file produced”.
+
+Por favor, instale a versão completa para o seu sistema: - **Windows:**
+[TeX Live Windows](https://tug.org/texlive/windows.html) ou [MiKTeX
+(instalação completa)](https://miktex.org/download) - **Linux
+(Ubuntu/Debian):** Abra o terminal e rode
+`sudo apt-get install texlive-full` - **macOS:**
+[MacTeX](https://tug.org/mactex/)
+
+Demais pré-requisitos: - R ≥ 3.5.0 - [Pandoc](https://pandoc.org) ≥ 2.0
 
 ``` r
 install.packages(c("bookdown", "knitr", "rmarkdown"))

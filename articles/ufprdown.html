@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ufprdown</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -136,8 +136,25 @@ partir do código-fonte ou do GitHub:</p>
 <strong>Pandoc</strong> ≥ 2.0 (<a href="https://pandoc.org" class="external-link">pandoc.org</a>)<br>
 </li>
 <li>
-<strong>LaTeX</strong>: TeX Live ou <a href="https://yihui.org/tinytex/" class="external-link">TinyTeX</a> — no R:
-<code><a href="https://rdrr.io/pkg/tinytex/man/install_tinytex.html" class="external-link">tinytex::install_tinytex()</a></code>
+<strong>LaTeX Completo (FULL)</strong>: Devido à enorme quantidade
+de pacotes LaTeX exigidos pela classe da UFPR (como bibliotecas
+avançadas de formatação, algoritmos e as fontes Times/Arial), <strong>é
+estritamente necessário</strong> ter uma distribuição TeX/LaTeX
+<em>completa</em> instalada no seu PC. Distribuições minimalistas
+internas do R (como o o <em>TinyTeX</em>) podem falhar ao compilar o PDF
+com o erro “Fatal error occurred, no output PDF file produced”. Instale:
+<ul>
+<li>
+<strong>Windows</strong>: <a href="https://miktex.org/download" class="external-link">MiKTeX (completo)</a> ou <a href="https://tug.org/texlive/windows.html" class="external-link">TeX Live</a>
+</li>
+<li>
+<strong>Linux (Debian/Ubuntu)</strong>: Vá ao terminal e rode
+<code>sudo apt-get install texlive-full</code>
+</li>
+<li>
+<strong>macOS</strong>: <a href="https://tug.org/mactex/" class="external-link">MacTeX</a>
+</li>
+</ul>
 </li>
 </ul>
 <hr>

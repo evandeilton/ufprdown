@@ -1,5 +1,18 @@
 # Changelog
 
+## ufprdown 0.1.2
+
+- Documentação atualizada alertando sobre a exigência primária de uma
+  intalação de distribuição LaTeX Completa (Full texlive/miktex) para
+  correto processamento e evitação do erro restritivo do pdf latex
+  (Fatal error occurred, no output PDF file produced).
+- Remoção temporária do R-CMD-check contínuo e infraestrutura testthat
+  do ecossistema devido a falhas e limitações do container de
+  bibliotecas isoladas online executarem pacotes grandes e base fonts
+  UFPR sem estourar compilação.
+- Site/Github Pages (pkgdown) do pacote parametrizado com fontes Serif
+  (Times New Roman).
+
 ## ufprdown 0.1.1
 
 - Adiciona a opção `font-family` no YAML template base, permitindo
