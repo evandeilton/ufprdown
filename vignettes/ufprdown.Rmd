@@ -57,7 +57,10 @@ remotes::install_github("evandeilton/ufprdown")
 
 - **R** ≥ 3.5.0  
 - **Pandoc** ≥ 2.0 ([pandoc.org](https://pandoc.org))  
-- **LaTeX**: TeX Live ou [TinyTeX](https://yihui.org/tinytex/) — no R: `tinytex::install_tinytex()`
+- **LaTeX Completo (FULL)**: Devido à enorme quantidade de pacotes LaTeX exigidos pela classe da UFPR (como bibliotecas avançadas de formatação, algoritmos e as fontes Times/Arial), **é estritamente necessário** ter uma distribuição TeX/LaTeX *completa* instalada no seu PC. Distribuições minimalistas internas do R (como o o *TinyTeX*) podem falhar ao compilar o PDF com o erro "Fatal error occurred, no output PDF file produced". Instale:
+  - **Windows**: [MiKTeX (completo)](https://miktex.org/download) ou [TeX Live](https://tug.org/texlive/windows.html)
+  - **Linux (Debian/Ubuntu)**: Vá ao terminal e rode `sudo apt-get install texlive-full`
+  - **macOS**: [MacTeX](https://tug.org/mactex/)
 
 ---
 
