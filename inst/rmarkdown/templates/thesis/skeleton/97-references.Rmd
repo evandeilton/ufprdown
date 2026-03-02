@@ -1,17 +1,17 @@
 <!--
-Este arquivo gera a seção de referências bibliográficas.
-As referências são processadas pelo pandoc citeproc (definido no YAML via
-'bibliography' e 'csl') e inseridas automaticamente no final do documento
-pelo bloco $for(include-after)$ do template.tex.
-NÃO use \bibliography{} aqui — isso conflita com o citeproc e duplica as referências.
+Este arquivo posiciona as referências bibliográficas antes dos apêndices.
+As referências são processadas pelo pandoc citeproc (via 'bibliography' e 'csl' no YAML)
+e inseridas no local marcado por <div id="refs"></div>.
+
+O título REFERÊNCIAS é gerado automaticamente pelo ambiente CSLReferences
+(que usa thebibliography internamente). NÃO adicione # Referências {-} aqui
+pois isso duplicaria o título.
 -->
 
 ```{r bib-packages, include=FALSE}
 # Gera citações para pacotes R usados
 knitr::write_bib(c("bookdown", "knitr", "rmarkdown"), "bib/pkgs.bib", width = 78)
 ```
-
-# Referências {-}
 
 <div id="refs"></div>
 

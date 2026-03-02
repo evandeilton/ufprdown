@@ -53,23 +53,19 @@ $endif$
 \setlength{\cslhangindent}{1.5em}
 \newlength{\csllabelwidth}
 \setlength{\csllabelwidth}{3em}
-% CSLReferences: ambiente para referências geradas pelo pandoc-citeproc.
-% Não usa list (que exige \item); pandoc >= 3.x não emite \item aqui.
+% CSLReferences: pandoc 3.x emite \bibitem[\citeproctext]{...} dentro deste ambiente.
+% \bibitem usa \item internamente e EXIGE thebibliography. Usamos thebibliography
+% como base para garantir compatibilidade. O título (REFER\^ENCIAS / REFERENCES)
+% é gerado automaticamente pelo thebibliography via \bibname, e o tocbibind
+% adiciona-o ao sumário. Não repita o título no Rmd.
 \ifdefined\CSLReferences
 \else
-\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
- {\par\setlength{\parskip}{#2\baselineskip}%
-  \ifodd #1
-    \setlength{\leftskip}{\cslhangindent}%
-    \setlength{\parindent}{-\cslhangindent}%
-  \fi}
- {\par}
+\newenvironment{CSLReferences}[2]{%
+  \begin{thebibliography}{MMMMM}%
+}{%
+  \end{thebibliography}%
+}
 \fi
-\usepackage{calc}
-\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\dimexpr\linewidth-\csllabelwidth\relax}{\strut#1\strut}}
-\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 $for(header-includes)$
 $header-includes$
