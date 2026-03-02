@@ -4,7 +4,5 @@ template:
   bootswatch: litera
   bslib:
     primary: "#1a5276"
-    base_font:
-      google: "Source Sans 3"
-    heading_font:
-      google: "Source Serif 4"
+    base_font: "Times New Roman, Times, serif"
+    heading_font: "Times New Roman, Times, serif"
