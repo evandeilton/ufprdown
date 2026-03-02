@@ -1,5 +1,10 @@
-# ufprdown 0.1.2
+# ufprdown 0.1.3
 
+* Correção drástica de um problema originário do pacote `rmarkdown` onde a função `draft(...)` renomeava automaticamente o `skeleton.Rmd` primário, quebrando o comportamento obrigatório de inicialização indexada do `bookdown`. Um proxy inteligente chamado `skeleton.Rmd` (Descartável) foi criado ao passo que o código real agora se encontra em um `index.Rmd` seguro na pasta template. 
+* Removido o argumento redundante e deflator `doc_mode` do YAML (que causava o erro irrecuperável `Lonely \item` ou `Undefined control sequence. \MT@patch@undo` se os usuários o desincronizassem). Toda a inteligência da classe `ppginf.cls` e os itens pré-textuais LaTeX agora obedecem unicamente à true/false na flag `final_mode` no `template.tex`.
+* Atualizada a documentação de Créditos.
+
+# ufprdown 0.1.2
 * Documentação atualizada alertando sobre a exigência primária de uma intalação de distribuição LaTeX Completa (Full texlive/miktex) para correto processamento e evitação do erro restritivo do pdf latex (Fatal error occurred, no output PDF file produced).
 * Remoção temporária do R-CMD-check contínuo e infraestrutura testthat do ecossistema devido a falhas e limitações do container de bibliotecas isoladas online executarem pacotes grandes e base fonts UFPR sem estourar compilação.
 * Site/Github Pages (pkgdown) do pacote parametrizado com fontes Serif (Times New Roman).

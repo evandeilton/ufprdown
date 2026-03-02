@@ -118,7 +118,7 @@ No cabeçalho do `index.Rmd`:
 | `author`, `advisor`, `coadvisor` | Autoria |
 | `institution`, `inst_short`, `field`, `local`, `date_year` | Instituição e ano |
 | `doc_type`, `level`, `degree`, `course` | Tipo (Tese/Dissertação/Trabalho de Conclusão de Curso) e programa |
-| `doc_mode`, `final_mode` | Versão defesa vs. final |
+| `final_mode` | Versão defesa (`false`) vs. versão final pós-defesa (`true`) |
 | `title`, `abstract`, `foreignabstract` | Título e resumos |
 | `palavras-chave`, `keywords` | Palavras-chave PT/EN |
 | `font-family` | Tipo de fonte para a redação do trabalho (`'Times New Roman'` ou `'Arial'`) |
@@ -134,8 +134,8 @@ Lista completa e exemplos estão na vignette: `vignette("ufprdown", package = "u
 
 ## Versão defesa vs. final
 
-- **defesa** (`doc_mode: 'defesa'`, `final_mode: false`): espaçamento 1,5; sem ficha catalográfica, folha de aprovação, dedicatória ou agradecimentos.
-- **final** (`doc_mode: 'final'`, `final_mode: true`): espaçamento simples; inclui todos os elementos pré-textuais.
+- **defesa** (`final_mode: false`): espaçamento 1,5; sem ficha catalográfica, folha de aprovação, dedicatória ou agradecimentos. Documento preparado para a primeira entrega pra banca.
+- **final** (`final_mode: true`): espaçamento simples; inclui todos os elementos pré-textuais e de assinatura necessários pós-banca.
 
 Nos campos `thanks` e `dedication`, não use `| ` no início de cada linha (o Pandoc gera lista e ocorre erro "Lonely \item" no LaTeX). Use apenas quebra de linha após o `|`:
 

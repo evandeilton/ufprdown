@@ -7,8 +7,8 @@
 % ─── CONFIGURAÇÃO DA CLASSE ─────────────────────────────────────────────────
 % Pacote exigido pela ppginf.cls (oficial PPGInf) em modo defesa
 \RequirePackage{comment}
-$if(doc_mode)$
-\documentclass[$doc_mode$,oneside,english,brazilian]{ppginf}
+$if(final_mode)$
+\documentclass[final,oneside,english,brazilian]{ppginf}
 $else$
 \documentclass[defesa,oneside,english,brazilian]{ppginf}
 $endif$

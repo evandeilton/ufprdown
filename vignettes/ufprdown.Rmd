@@ -259,8 +259,7 @@ Estes são os parâmetros mais vitais para o fluxo de revisão do documento:
 
 | Campo | Descrição e Valores |
 |-------|---------------------|
-| `doc_mode` | `'defesa'`: Compila o texto com espaçamento 1,5, ideal para a banca ler. Oculta ficha catalográfica, aprovação, dedicatória e agradecimentos.<br>`'final'`: Compila com espaçamento simples (padrão final UFPR) e exibe os itens pré-textuais. |
-| `final_mode` | `false`: Usado enquanto estiver escrevendo ou para a qualificação/defesa.<br>`true`: Ativa a inclusão dos PDFs obrigatórios pós-defesa (ficha catalográfica e folha de assinaturas da banca). |
+| `final_mode` | `false`: Compila o texto com espaçamento 1,5, ideal para a banca ler. Oculta ficha catalográfica, aprovação, dedicatória e agradecimentos. Usado enquanto estiver escrevendo ou para a qualificação/defesa.<br>`true`: Compila com espaçamento simples (padrão final UFPR) e exibe os itens pré-textuais. Ativa a inclusão dos PDFs obrigatórios pós-defesa (ficha catalográfica e folha de assinaturas da banca). |
 
 **Importante (modo final):** Nos campos `thanks` e `dedication`, **não use `| ` (pipe mais espaço) no início de cada linha**. Esse formato é interpretado pelo Pandoc como lista e gera `\item` no LaTeX, causando erro "Lonely \item". Use apenas o pipe da string multilinha e quebras de linha normais, por exemplo:
 
@@ -407,8 +406,8 @@ Conteúdo da definição.
 |----------|------|
 | Criar projeto | RStudio: New Project → Tese UFPR; ou `rmarkdown::draft(..., template = "thesis", package = "ufprdown")` |
 | Gerar PDF | `render_book("index.Rmd", "ufprdown::thesis_pdf")` ou Build Book no RStudio |
-| Versão defesa | `doc_mode: 'defesa'`, `final_mode: false` |
-| Versão final | `doc_mode: 'final'`, `final_mode: true`; preencher `thanks`/`dedication` sem `\| ` no início das linhas |
+| Versão defesa | `final_mode: false` |
+| Versão final | `final_mode: true`; preencher `thanks`/`dedication` sem `\| ` no início das linhas |
 | Dissertação/TCC | Ajustar `doc_type`, `level`, `degree` e `course` no YAML |
 | Referências cruzadas | `\@ref(fig:...)`, `\@ref(tab:...)`, `\@ref(eq:...)`, `\@ref(thm:...)`, etc. |
 | Citações | `@chave` ou `[@chave]`; `bibliography` e `csl` no YAML |
@@ -428,7 +427,7 @@ O *ufprdown* abstrai a complexidade do LaTeX e resolve automatizadamente atravé
 
 * **Gerenciamento de metadados via YAML:** Você escreve seus dados apenas uma vez no arquivo principal.
 * **Geração nativa de Listas:** Todas as listas de Siglas, Símbolos, Rótulos, bem como o Sumário, Ficha Catalográfica e Folha de Aprovação são invocados automaticamente.
-* **Inteligência de Modos:** Ao alternar o parâmetro `doc_mode` entre `final` ou `defesa`, o ufprdown ativa e desativa (sem você saber LaTeX) a presença das páginas pré-textuais e de aprovações.
+* **Inteligência de Modos:** Ao alternar o parâmetro `final_mode` entre `false` (banca) ou `true` (final), o ufprdown ativa e desativa (sem você saber LaTeX) a presença das páginas pré-textuais e de aprovações.
 * **Multi-arquivos:** Distribuição isolada de conteúdo em arquitetura de capítulos do `bookdown`.
 * **Separação Quadros vs Tabelas:** O template resolve a diferenciação semântica e tipográfica entre tabelas genéricas e quadros textuais dentro do engine do RMarkdown.
 * **Apêndices e Anexos independentes:** Fluxos de contagem automatizados e divididos para Apêndices e Anexos.
