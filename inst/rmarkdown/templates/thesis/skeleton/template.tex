@@ -35,6 +35,9 @@ $endif$
 % Comandos auxiliares para bookdown/pandoc
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
+% Compatibilidade com pandoc >= 3.2.1 (Undefined control sequence \pandocbounded)
+\providecommand{\pandocbounded}[1]{#1}
+
 % Compatibilidade com pandoc citeproc (pandoc >= 3.x)
 \NewDocumentCommand\citeproctext{}{}
 \NewDocumentCommand\citeproc{mm}{%
