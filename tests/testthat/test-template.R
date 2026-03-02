@@ -78,13 +78,12 @@ test_that("o template thesis compila em PDF nas fontes padrao e alternativas", {
             if (file.exists(log_name)) {
                 log_content <- paste(readLines(log_name), collapse = "\n")
                 if (nchar(log_content) > 3000) {
-                  log_content <- paste("...[truncado]...\n", substr(log_content, nchar(log_content) - 3000, nchar(log_content)))
+                    log_content <- paste("...[truncado]...\n", substr(log_content, nchar(log_content) - 3000, nchar(log_content)))
                 }
-                e$message <- paste0(e$message, "\n\n====== LATEX LOG ERROR ======\n", log_content, "\n=============================\n")
+                stop(paste0(e$message, "\n\n====== LATEX LOG ERROR ======\n", log_content, "\n=============================\n"))
             } else {
-                e$message <- paste0(e$message, "\n\n====== NO LOG FILE FOUND IN ", getwd(), " ======\nLogs disponiveis: ", paste(list.files(pattern = "\\.log$"), collapse=", "))
+                stop(paste0(e$message, "\n\n====== NO LOG FILE FOUND IN ", getwd(), " ======\nLogs disponiveis: ", paste(list.files(pattern = "\\.log$"), collapse = ", ")))
             }
-            stop(e)
         }, finally = {
             setwd(owd)
         })
