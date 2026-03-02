@@ -27,12 +27,18 @@ O arquivo **ppginf.cls** é o template oficial do PPGInf/UFPR e não deve ser mo
 
 **Origem do template:** O ufprdown segue a mesma abordagem do [thesisdown](https://github.com/ismayc/thesisdown) (Chester Ismay): um template R Markdown baseado em bookdown que gera um documento acadêmico a partir de uma classe LaTeX institucional. A estrutura e várias convenções foram inspiradas também no [ufscdown](https://github.com/lfpdroubi/ufscdown) (Luiz Droubi), adaptadas para a UFPR.
 
-**Outros créditos:**
-
-- Classe **ppginf.cls**: Prof. Carlos A. Maziero (DInf/UFPR) — template oficial PPGInf/UFPR.
+**Template Base (LaTeX):**
+- Classe **ppginf.cls**: Criada pelo Prof. Carlos A. Maziero (maziero@inf.ufpr.br) — DInf/UFPR.
+- **Fontes originais da classe:** Disponíveis em seu [Wiki](http://wiki.inf.ufpr.br/maziero/doku.php?id=software:latex) e no repositório do [GitLab C3SL](https://gitlab.c3sl.ufpr.br/maziero/tese).
+- **Aprimoramentos do ufprdown:** O pacote R *ufprdown* utiliza a base estrutural desenhada pelo professor Maziero e **soluciona de forma automatizada (via R/Pandoc)** diversas pendências listadas no repositório original da classe, tais como:
+  - Geração automatizada das listas de símbolos e abreviações (diretamente geridas via YAML e Markdown);
+  - Inteligência fluida no posicionamento de Ficha Catalográfica e Folhas de Aprovação dependendo do "modo final" x "modo defesa";
+  - Distribuição isolada de conteúdo em formato multi-arquivos para a produção veloz de capítulos via bookdown;
+  - Diferenciação nativa entre "Tabelas" e "Quadros" na engine do RMarkdown;
+  - Separação automatizada da contagem entre Apêndices e Anexos.
 - [bookdown](https://bookdown.org/) (Yihui Xie).
 
-O ufprdown não é um fork de thesisdown ou ufscdown; é um pacote independente que reutiliza a ideia (bookdown + LaTeX institucional) e adapta o fluxo para a classe ppginf.cls da UFPR.
+O ufprdown não é um fork direto do `thesisdown` ou `ufscdown`; é um pacote independente criado do zero que reutiliza a ideia da abstração do RMarkdown e a aplica à classe nativa `ppginf.cls` da UFPR solucionando o seu ecossistema.
 
 ---
 

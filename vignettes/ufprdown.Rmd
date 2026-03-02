@@ -413,4 +413,25 @@ Conteúdo da definição.
 | Referências cruzadas | `\@ref(fig:...)`, `\@ref(tab:...)`, `\@ref(eq:...)`, `\@ref(thm:...)`, etc. |
 | Citações | `@chave` ou `[@chave]`; `bibliography` e `csl` no YAML |
 
+---
+
+# Origem e Créditos
+
+O pacote **ufprdown** usa o RMarkdown e o ecossistema `bookdown` para entregar a abstração completa do template LaTeX do **PPGInf/UFPR**. 
+
+**Template Base (LaTeX):**
+- A classe **ppginf.cls** original foi criada e é mantida pelo **Prof. Carlos A. Maziero** (`maziero@inf.ufpr.br`). 
+- Suas fontes originais, históricos e instruções em LaTeX puro podem ser encontradas em sua [página no Wiki](http://wiki.inf.ufpr.br/maziero/doku.php?id=software:latex) e no repositório do [GitLab C3SL](https://gitlab.c3sl.ufpr.br/maziero/tese).
+
+**Aprimoramentos do pacote:**
+O *ufprdown* abstrai a complexidade do LaTeX e resolve automatizadamente através da linguagem R e do Pandoc diversas "pendências" históricas listadas na estrutura do modelo original. Destacam-se as seguintes resoluções contempladas por este pacote:
+
+* **Gerenciamento de metadados via YAML:** Você escreve seus dados apenas uma vez no arquivo principal.
+* **Geração nativa de Listas:** Todas as listas de Siglas, Símbolos, Rótulos, bem como o Sumário, Ficha Catalográfica e Folha de Aprovação são invocados automaticamente.
+* **Inteligência de Modos:** Ao alternar o parâmetro `doc_mode` entre `final` ou `defesa`, o ufprdown ativa e desativa (sem você saber LaTeX) a presença das páginas pré-textuais e de aprovações.
+* **Multi-arquivos:** Distribuição isolada de conteúdo em arquitetura de capítulos do `bookdown`.
+* **Separação Quadros vs Tabelas:** O template resolve a diferenciação semântica e tipográfica entre tabelas genéricas e quadros textuais dentro do engine do RMarkdown.
+* **Apêndices e Anexos independentes:** Fluxos de contagem automatizados e divididos para Apêndices e Anexos.
+
+O ufprdown segue o conceito de pacotes pioneiros da cena internacional, como o [thesisdown](https://github.com/ismayc/thesisdown) (Chester Ismay) e do brasileiro [ufscdown](https://github.com/lfpdroubi/ufscdown) (Luiz Droubi). Ele, contudo, é um pacote desenvolvido do zero, pensado única e exclusivamente para lidar com a semântica da UFPR. E o mais importante: preserva de forma canônica os arquivos `.cls` originais do professor Maziero sem nenhuma adulteração.
 Para mais detalhes, consulte o [README do pacote](https://github.com/evandeilton/ufprdown) e a documentação da classe **ppginf.cls** (PPGInf/UFPR).
